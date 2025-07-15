@@ -2,99 +2,153 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ADU Cost Estimator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: auto;
-      padding: 20px;
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
     }
+
+    .container {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      color: #212529;
+    }
+
     label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
       display: block;
-      margin-top: 15px;
+      margin-top: 1rem;
+      color: #343a40;
     }
+
     select, button {
       width: 100%;
-      padding: 8px;
-      margin-top: 5px;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #ced4da;
+      font-size: 1rem;
+      margin-top: 0.25rem;
+      background-color: #fff;
     }
-    #output {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #f4f4f4;
-      border: 1px solid #ccc;
+
+    select:focus, button:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+    }
+
+    button {
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .output {
+      margin-top: 1.5rem;
+      background-color: #e9ecef;
+      padding: 1rem;
+      border-radius: 8px;
+      color: #212529;
+      text-align: center;
+      font-weight: 500;
     }
   </style>
 </head>
 <body>
-  <h2>ADU Cost Estimator</h2>
+  <div class="container">
+    <h1>ADU Cost Estimator</h1>
+    
+    <label for="type">Type of ADU</label>
+    <select id="type">
+      <option>Garage</option>
+      <option>Detached</option>
+      <option>Basement</option>
+    </select>
 
-  <label for="type">Type of ADU</label>
-  <select id="type">
-    <option value="Garage">Garage</option>
-    <option value="Detached">Detached</option>
-    <option value="basement">Basement</option>
-  </select>
+    <label for="squareFootage">Square Footage</label>
+    <select id="squareFootage">
+      <option>450-600</option>
+      <option>650-900</option>
+      <option>900+</option>
+    </select>
 
-  <label for="sqft">Square Footage</label>
-  <select id="sqft">
-    <option value="450-600">450-600</option>
-    <option value="650-900">650-900</option>
-    <option value="900+">900+</option>
-  </select>
+    <label for="bedrooms">Bedrooms</label>
+    <select id="bedrooms">
+      <option>Studio</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+    </select>
 
-  <label for="bedrooms">Bedrooms</label>
-  <select id="bedrooms">
-    <option value="Studio">Studio</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-  </select>
+    <label for="bathrooms">Bathrooms</label>
+    <select id="bathrooms">
+      <option>1</option>
+      <option>2</option>
+    </select>
 
-  <label for="baths">Bathrooms</label>
-  <select id="baths">
-    <option value="1">1</option>
-    <option value="2">2</option>
-  </select>
+    <button onclick="estimateCost()">Estimate</button>
 
-  <button onclick="calculateCost()">Estimate</button>
-
-  <div id="output"></div>
+    <div id="output" class="output"></div>
+  </div>
 
   <script>
-    function calculateCost() {
+    function estimateCost() {
       const type = document.getElementById("type").value;
-      const sqft = document.getElementById("sqft").value;
-      const bedrooms = document.getElementById("bedrooms").value;
-      const baths = document.getElementById("baths").value;
+      const size = document.getElementById("squareFootage").value;
+      const beds = document.getElementById("bedrooms").value;
+      const baths = document.getElementById("bathrooms").value;
 
-      // Reference table from your data
-      const data = [
-        { type: "Garage", sqft: "450-600", fixed: 4425, ob: "75-113", gc: "113-188" },
-        { type: "Garage", sqft: "650-900", fixed: 4425, ob: "75-113", gc: "113-188" },
-        { type: "Garage", sqft: "900+", fixed: 4425, ob: "75-113", gc: "113-188" },
-        { type: "Detached", sqft: "450-600", fixed: 5625, ob: "131-188", gc: "188-263" },
-        { type: "Detached", sqft: "650-900", fixed: 5625, ob: "131-188", gc: "166-263" },
-        { type: "Detached", sqft: "900+", fixed: 7125, ob: "131-188", gc: "188-263" },
-        { type: "basement", sqft: "650-900", fixed: 4425, ob: "131-188", gc: "188-263" },
-        { type: "basement", sqft: "900+", fixed: 4425, ob: "131-188", gc: "188-263" },
-      ];
+      // Basic mock logic (replace with your formula)
+      const ranges = {
+        "Garage": [113, 188],
+        "Detached": {
+          "450-600": [188, 263],
+          "650-900": [188, 263],
+          "900+": [188, 263]
+        },
+        "Basement": [188, 263]
+      };
 
-      const match = data.find(row => row.type === type && row.sqft === sqft);
+      let min = 0;
+      let max = 0;
 
-      if (match) {
-        document.getElementById("output").innerHTML = `
-          <strong>Estimated Costs:</strong><br>
-          Fixed Cost: $${match.fixed}<br>
-          Owner-Builder Cost: ${match.ob} per sq ft<br>
-          General Contractor Cost: ${match.gc} per sq ft
-        `;
+      if (type === "Detached") {
+        [min, max] = ranges[type][size] || [0, 0];
       } else {
-        document.getElementById("output").innerHTML = "No estimate available for this configuration.";
+        [min, max] = ranges[type] || [0, 0];
       }
+
+      document.getElementById("output").innerText =
+        `Estimated general contractor cost: $${min} – $${max} per sq ft`;
     }
   </script>
 </body>
 </html>
+
