@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ADU Cost Estimator</title>
+  <title>ADU Estimator - Step 1</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -13,54 +13,63 @@
       padding: 0;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       min-height: 100vh;
     }
 
-    .wrapper {
-      background: #ffffff;
-      padding: 3rem;
-      border-radius: 16px;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
-      max-width: 550px;
+    .container {
+      max-width: 600px;
       width: 90%;
+      margin-top: 4rem;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    }
+
+    .step-indicator {
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      color: #002f6c;
     }
 
     h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #002f6c; /* royal blue */
-      text-align: center;
+      font-size: 1.8rem;
+      color: #002f6c;
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      color: #555;
       margin-bottom: 2rem;
     }
 
     label {
       font-weight: 600;
-      margin-top: 1.2rem;
-      margin-bottom: 0.4rem;
+      margin-top: 1rem;
       display: block;
       color: #333;
     }
 
-    select {
+    input, select {
       width: 100%;
-      padding: 0.7rem;
-      border-radius: 8px;
+      padding: 0.75rem;
       border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-top: 0.5rem;
       font-size: 1rem;
-      background-color: #f9f9f9;
     }
 
     button {
-      width: 100%;
-      background: #c8102e; /* scarlet red */
-      color: white;
-      padding: 0.9rem;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 10px;
       margin-top: 2rem;
+      background: #c8102e;
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      width: 100%;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 1rem;
       cursor: pointer;
       transition: background 0.3s ease;
     }
@@ -68,95 +77,34 @@
     button:hover {
       background: #a80c26;
     }
-
-    .results {
-      margin-top: 2rem;
-      background: #e7f1ff;
-      border-left: 4px solid #002f6c;
-      padding: 1rem;
-      border-radius: 10px;
-    }
-
-    .result-line {
-      margin: 0.5rem 0;
-      font-weight: 600;
-      color: #002f6c;
-    }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <h1>ADU Cost Estimator</h1>
+  <div class="container">
+    <div class="step-indicator">Step 1 of 6</div>
+    <h1>Your ADU Project Estimate</h1>
+    <p class="subtitle">Get a personalized cost estimate in under 3 minutes</p>
 
-    <label for="type">Type of ADU</label>
-    <select id="type">
-      <option>Garage</option>
-      <option>Detached</option>
-      <option>Basement</option>
+    <label for="address">Street Address</label>
+    <input type="text" id="address" placeholder="Enter your street address">
+
+    <label for="city">City</label>
+    <input type="text" id="city" placeholder="Enter your city">
+
+    <label for="state">State</label>
+    <select id="state">
+      <option>California (CA)</option>
+      <option>New York (NY)</option>
+      <option>Texas (TX)</option>
+      <option>Florida (FL)</option>
     </select>
 
-    <label for="size">Square Footage</label>
-    <select id="size">
-      <option>450-600</option>
-      <option>650-900</option>
-      <option>900+</option>
-    </select>
-
-    <label for="bedrooms">Bedrooms</label>
-    <select id="bedrooms">
-      <option>Studio</option>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-    </select>
-
-    <label for="bathrooms">Bathrooms</label>
-    <select id="bathrooms">
-      <option>1</option>
-      <option>2</option>
-    </select>
-
-    <button onclick="estimateCost()">Estimate</button>
-
-    <div id="results" class="results" style="display:none">
-      <div class="result-line" id="fixedCost"></div>
-      <div class="result-line" id="ownerBuilder"></div>
-      <div class="result-line" id="generalContractor"></div>
-    </div>
+    <button onclick="goToNextStep()">Continue</button>
   </div>
 
   <script>
-    function estimateCost() {
-      const type = document.getElementById('type').value;
-      const size = document.getElementById('size').value;
-      const resultsBox = document.getElementById('results');
-
-      let fixedCost = 0;
-      let ownerBuilderRange = '';
-      let contractorRange = '';
-
-      if (type === 'Garage') {
-        fixedCost = 4425;
-        ownerBuilderRange = '75–113 per sq ft';
-        contractorRange = '113–188 per sq ft';
-      } else if (type === 'Basement') {
-        fixedCost = 4425;
-        ownerBuilderRange = '131–188 per sq ft';
-        contractorRange = '188–263 per sq ft';
-      } else if (type === 'Detached') {
-        if (size === '450-600') fixedCost = 5625;
-        else if (size === '650-900') fixedCost = 5625;
-        else fixedCost = 7125;
-
-        ownerBuilderRange = '131–188 per sq ft';
-        contractorRange = '188–263 per sq ft';
-      }
-
-      document.getElementById('fixedCost').innerText = `Fixed Cost: $${fixedCost}`;
-      document.getElementById('ownerBuilder').innerText = `Owner-Builder Estimate: ${ownerBuilderRange}`;
-      document.getElementById('generalContractor').innerText = `General Contractor Estimate: ${contractorRange}`;
-
-      resultsBox.style.display = 'block';
+    function goToNextStep() {
+      window.location.href = "step2.html"; // placeholder for next step
     }
   </script>
 </body>
