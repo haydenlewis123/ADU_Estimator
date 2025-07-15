@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADU Cost Estimator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    select, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f4f4f4;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h2>ADU Cost Estimator</h2>
+
+  <label for="type">Type of ADU</label>
+  <select id="type">
+    <option value="Garage">Garage</option>
+    <option value="Detached">Detached</option>
+    <option value="basement">Basement</option>
+  </select>
+
+  <label for="sqft">Square Footage</label>
+  <select id="sqft">
+    <option value="450-600">450-600</option>
+    <option value="650-900">650-900</option>
+    <option value="900+">900+</option>
+  </select>
+
+  <label for="bedrooms">Bedrooms</label>
+  <select id="bedrooms">
+    <option value="Studio">Studio</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+
+  <label for="baths">Bathrooms</label>
+  <select id="baths">
+    <option value="1">1</option>
+    <option value="2">2</option>
+  </select>
+
+  <button onclick="calculateCost()">Estimate</button>
+
+  <div id="output"></div>
+
+  <script>
+    function calculateCost() {
+      const type = document.getElementById("type").value;
+      const sqft = document.getElementById("sqft").value;
+      const bedrooms = document.getElementById("bedrooms").value;
+      const baths = document.getElementById("baths").value;
+
+      // Reference table from your data
+      const data = [
+        { type: "Garage", sqft: "450-600", fixed: 4425, ob: "75-113", gc: "113-188" },
+        { type: "Garage", sqft: "650-900", fixed: 4425, ob: "75-113", gc: "113-188" },
+        { type: "Garage", sqft: "900+", fixed: 4425, ob: "75-113", gc: "113-188" },
+        { type: "Detached", sqft: "450-600", fixed: 5625, ob: "131-188", gc: "188-263" },
+        { type: "Detached", sqft: "650-900", fixed: 5625, ob: "131-188", gc: "166-263" },
+        { type: "Detached", sqft: "900+", fixed: 7125, ob: "131-188", gc: "188-263" },
+        { type: "basement", sqft: "650-900", fixed: 4425, ob: "131-188", gc: "188-263" },
+        { type: "basement", sqft: "900+", fixed: 4425, ob: "131-188", gc: "188-263" },
+      ];
+
+      const match = data.find(row => row.type === type && row.sqft === sqft);
+
+      if (match) {
+        document.getElementById("output").innerHTML = `
+          <strong>Estimated Costs:</strong><br>
+          Fixed Cost: $${match.fixed}<br>
+          Owner-Builder Cost: ${match.ob} per sq ft<br>
+          General Contractor Cost: ${match.gc} per sq ft
+        `;
+      } else {
+        document.getElementById("output").innerHTML = "No estimate available for this configuration.";
+      }
+    }
+  </script>
+</body>
+</html>
