@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADU Estimator - Step 2</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Flex:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0b0c10;
+      --accent-color: #e63946;
+      --accent-color-dark: #ba1e2e;
+      --secondary-color: #1d3557;
+      --light-gray: #f8f9fa;
+      --card-color: #ffffff;
+      --shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+      --radius: 20px;
+      --font: 'Roboto Flex', 'Inter', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #f0f2f5, #ffffff);
+      font-family: var(--font);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 95%;
+      background: var(--card-color);
+      border-radius: var(--radius);
+      padding: 3.5rem;
+      margin-top: 4rem;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-indicator {
+      color: var(--secondary-color);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .subtitle {
+      color: #555;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin: 1.5rem 0 0.5rem;
+      color: #333;
+      font-size: 1rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      border-radius: 14px;
+      border: 1px solid #ced4da;
+      font-size: 1rem;
+      background-color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    select:focus {
+      border-color: var(--accent-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.2);
+    }
+
+    button {
+      margin-top: 2.5rem;
+      background: var(--accent-color);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background: var(--accent-color-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(230, 57, 70, 0.3);
+    }
+
+    .results {
+      margin-top: 2rem;
+      background: var(--light-gray);
+      padding: 1.5rem;
+      border-radius: 16px;
+      font-size: 1rem;
+    }
+
+    .results div {
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="step-indicator">Step 2 of 6</div>
+    <h1>Project Specifications</h1>
+    <p class="subtitle">Help us understand what kind of ADU you're building.</p>
+
+    <label for="type">Type of ADU</label>
+    <select id="type">
+      <option disabled selected>Select type</option>
+      <option value="garage">Garage Conversion</option>
+      <option value="detached">Detached ADU</option>
+      <option value="attached">Attached ADU</option>
+    </select>
+
+    <label for="size">Square Footage</label>
+    <select id="size">
+      <option disabled selected>Select size</option>
+      <option value="<450">Less than 450 sq ft</option>
+      <option value="450-600">450–600 sq ft</option>
+      <option value="600-750">600–750 sq ft</option>
+      <option value=">750">Over 750 sq ft</option>
+    </select>
+
+    <label for="bedrooms">Bedrooms</label>
+    <select id="bedrooms">
+      <option disabled selected>Select</option>
+      <option value="studio">Studio</option>
+      <option value="1">1 Bedroom</option>
+      <option value="2">2 Bedrooms</option>
+      <option value="3">3 Bedrooms</option>
+    </select>
+
+    <label for="bathrooms">Bathrooms</label>
+    <select id="bathrooms">
+      <option disabled selected>Select</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+    </select>
+
+    <button onclick="calculateEstimate()">Estimate</button>
+
+    <div class="results" id="results" style="display:none">
+      <div id="fixedCost"></div>
+      <div id="ownerBuilderCost"></div>
+      <div id="contractorCost"></div>
+    </div>
+  </div>
+
+  <script>
+    function calculateEstimate() {
+      const type = document.getElementById('type').value;
+      const size = document.getElementById('size').value;
+      const beds = document.getElementById('bedrooms').value;
+      const baths = document.getElementById('bathrooms').value;
+
+      // Dummy logic for estimation — replace with real formula
+      let base = 100000;
+      if (type === 'detached') base += 50000;
+      if (size === '450-600') base += 25000;
+      if (size === '600-750') base += 50000;
+      if (size === '>750') base += 80000;
+      if (beds === '1') base += 20000;
+      if (beds === '2') base += 40000;
+      if (beds === '3') base += 60000;
+      if (baths === '2') base += 15000;
+      if (baths === '3') base += 30000;
+
+      const ownerBuilder = base * 0.85;
+      const contractor = base * 1.15;
+
+      document.getElementById('fixedCost').textContent = `Fixed Cost Estimate: $${base.toLocaleString()}`;
+      document.getElementById('ownerBuilderCost').textContent = `Owner-Builder Estimate: $${ownerBuilder.toLocaleString()}`;
+      document.getElementById('contractorCost').textContent = `General Contractor Estimate: $${contractor.toLocaleString()}`;
+      document.getElementById('results').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
