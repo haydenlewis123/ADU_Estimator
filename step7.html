@@ -1,148 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Step 7 - Estimate</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ADU Estimator – Step 7</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary-color: #1f2937;
+      --secondary-color: #6b7280;
+      --accent-color: #e63946;
+      --accent-hover: #c72a30;
+      --background-color: #f9fafb;
+      --card-color: #ffffff;
+      --border-color: #e5e7eb;
+      --font: 'Inter', sans-serif;
+    }
+
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f9fafb;
-      color: #111827;
+      font-family: var(--font);
+      background-color: var(--background-color);
+      color: var(--primary-color);
       margin: 0;
-      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 2.5rem 1rem;
     }
 
     .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 24px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      max-width: 720px;
+      width: 100%;
+      background: var(--card-color);
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      padding: 3rem;
     }
 
     h1 {
-      font-size: 28px;
+      font-size: 2rem;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 0.75rem;
     }
 
-    .subtitle {
-      font-size: 16px;
-      color: #6b7280;
-      margin-bottom: 24px;
+    p.subtitle {
+      font-size: 1rem;
+      color: var(--secondary-color);
+      margin-bottom: 2rem;
     }
 
-    .section {
-      margin-bottom: 32px;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      padding: 20px;
-    }
-
-    .section h2 {
-      font-size: 18px;
+    label {
       font-weight: 600;
-      margin-bottom: 16px;
+      display: block;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
     }
 
-    .estimate-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
+    input, textarea {
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+      font-size: 1rem;
+      background-color: #fff;
+      transition: border 0.3s ease;
     }
 
-    .note {
-      font-size: 14px;
-      color: #6b7280;
-      margin-top: 8px;
+    input:focus, textarea:focus {
+      border-color: var(--accent-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.15);
     }
 
-    .button {
-      background-color: #14532d;
-      color: white;
-      padding: 14px 28px;
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 2.5rem;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      background-color: var(--accent-color);
+      color: #fff;
       border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
+      border-radius: 14px;
       cursor: pointer;
-      margin-top: 24px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: var(--accent-hover);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 2rem;
+      }
+
+      h1 {
+        font-size: 1.65rem;
+      }
     }
   </style>
 </head>
-
 <body>
+
   <div class="container">
-    <h1>Your Estimate is Ready!</h1>
-    <p class="subtitle">We've analyzed your project requirements and prepared a personalized estimate.</p>
+    <h1>Almost Done!</h1>
+    <p class="subtitle">Tell us how to reach you, and we’ll share your personalized estimate.</p>
 
-    <div class="section">
-      <h2>Architectural Planning & Engineering</h2>
-      <div class="estimate-item">
-        <span>Fixed Cost:</span>
-        <span id="fixedCost">$0</span>
-      </div>
-    </div>
+    <form id="contact-form">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" required>
 
-    <div class="section">
-      <h2>Construction Cost Estimate</h2>
-      <div class="estimate-item">
-        <span>General Contractor:</span>
-        <span id="gcCost">$0 - $0</span>
-      </div>
-      <div class="estimate-item">
-        <span>Owner-Builder:</span>
-        <span id="obCost">$0 - $0</span>
-      </div>
-      <p class="note">Note: This is a preliminary estimate. Final costs may vary based on site conditions, material selections, and contractor bids.</p>
-    </div>
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" required>
 
-    <button class="button">Book a Free Consult</button>
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="Optional">
+
+      <label for="notes">Anything you'd like us to know?</label>
+      <textarea id="notes" placeholder="Optional..."></textarea>
+
+      <button type="submit">Submit & View Estimate</button>
+    </form>
   </div>
 
   <script>
-    // Sample selections from previous steps (in practice, retrieve these from localStorage/sessionStorage or pass through query params)
-    const aduType = localStorage.getItem('aduType'); // 'garage', 'basement', 'detached'
-    const sqft = parseInt(localStorage.getItem('squareFootage') || '0');
+    const form = document.getElementById('contact-form');
 
-    let fixedCost = 0;
-    let obMin = 0;
-    let obMax = 0;
-    let gcMin = 0;
-    let gcMax = 0;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    if (aduType === 'garage') {
-      fixedCost = 4425;
-      obMin = 75;
-      obMax = 113;
-      gcMin = 113;
-      gcMax = 188;
-    } else if (aduType === 'basement') {
-      fixedCost = 4425;
-      obMin = 131;
-      obMax = 188;
-      gcMin = 188;
-      gcMax = 263;
-    } else if (aduType === 'detached') {
-      if (sqft <= 900) {
-        fixedCost = 5625;
-      } else {
-        fixedCost = 7125;
-      }
-      obMin = 131;
-      obMax = 188;
-      gcMin = 188;
-      gcMax = 263;
-    }
+      const data = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        notes: document.getElementById("notes").value,
+        aduType: sessionStorage.getItem("aduType"),
+        squareFootage: sessionStorage.getItem("squareFootage"),
+        bedrooms: sessionStorage.getItem("bedrooms"),
+        bathrooms: sessionStorage.getItem("bathrooms")
+      };
 
-    document.getElementById('fixedCost').textContent = `$${fixedCost.toLocaleString()}`;
-    document.getElementById('obCost').textContent = `$${obMin} - $${obMax}`;
-    document.getElementById('gcCost').textContent = `$${gcMin} - $${gcMax}`;
+      fetch("YOUR_GOOGLE_WEBAPP_URL", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = "thankyou.html";
+        } else {
+          alert("Submission failed. Please try again.");
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("There was a problem submitting your form.");
+      });
+    });
   </script>
-</body>
 
+</body>
 </html>
