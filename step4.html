@@ -139,38 +139,38 @@
 
         <form id="details-form" class="details-form">
             
-            <section id="section-sqft" class="form-section">
-                <h2 class="section-title">Square Footage</h2>
-                <div class="choice-group sqft-group">
-                    <div>
-                        <input type="radio" id="sqft-small" name="square_footage" value="Up to 650 sq ft" required>
-                        <label for="sqft-small" class="choice-label">
-                            <div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div>
-                            <svg class="choice-icon"><use xlink:href="#icon-house"></use></svg>
-                            <span class="choice-title">Small</span>
-                            <span class="choice-subtitle">Up to 650 sq ft</span>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="radio" id="sqft-medium" name="square_footage" value="650-900 sq ft">
-                        <label for="sqft-medium" class="choice-label">
-                            <div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div>
-                            <svg class="choice-icon" style="transform: scale(1.1);"><use xlink:href="#icon-house"></use></svg>
-                            <span class="choice-title">Medium</span>
-                            <span class="choice-subtitle">650-900 sq ft</span>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="radio" id="sqft-large" name="square_footage" value="Over 900 sq ft">
-                        <label for="sqft-large" class="choice-label">
-                            <div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div>
-                            <svg class="choice-icon" style="transform: scale(1.2);"><use xlink:href="#icon-house"></use></svg>
-                            <span class="choice-title">Large</span>
-                            <span class="choice-subtitle">Over 900 sq ft</span>
-                        </label>
-                    </div>
-                </div>
-            </section>
+           <section id="section-sqft" class="form-section">
+    <h2 class="section-title">Square Footage</h2>
+    <div class="choice-group sqft-group">
+        <div>
+            <input type="radio" id="sqft-small" name="square_footage" value="Small" required>
+            <label for="sqft-small" class="choice-label">
+                <div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div>
+                <svg class="choice-icon"><use xlink:href="#icon-house"></use></svg>
+                <span class="choice-title">Small</span>
+                <span class="choice-subtitle">Up to 650 sq ft</span>
+            </label>
+        </div>
+        <div>
+            <input type="radio" id="sqft-medium" name="square_footage" value="Medium">
+            <label for="sqft-medium" class="choice-label">
+                <div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div>
+                <svg class="choice-icon" style="transform: scale(1.1);"><use xlink:href="#icon-house"></use></svg>
+                <span class="choice-title">Medium</span>
+                <span class="choice-subtitle">650-900 sq ft</span>
+            </label>
+        </div>
+        <div>
+            <input type="radio" id="sqft-large" name="square_footage" value="Large">
+            <label for="sqft-large" class="choice-label">
+                <div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div>
+                <svg class="choice-icon" style="transform: scale(1.2);"><use xlink:href="#icon-house"></use></svg>
+                <span class="choice-title">Large</span>
+                <span class="choice-subtitle">Over 900 sq ft</span>
+            </label>
+        </div>
+    </div>
+</section>
 
             <section id="section-bed" class="form-section">
                 <h2 class="section-title">Bedrooms</h2>
@@ -206,19 +206,15 @@
     const sectionBed = document.getElementById('section-bed');
     const sectionBath = document.getElementById('section-bath');
 
-    // --- Main Logic: Handle user interaction ---
     form.addEventListener('change', (e) => {
         if (e.target.type === 'radio') {
             const fieldName = e.target.name;
-
-            // Reveal the next section based on the current selection
             if (fieldName === 'square_footage') {
                 sectionBed.classList.remove('is-inactive');
             }
             if (fieldName === 'bedrooms') {
                 sectionBath.classList.remove('is-inactive');
             }
-            
             checkFormCompletion();
         }
     });
@@ -227,8 +223,6 @@
         const sqftSelected = form.querySelector('input[name="square_footage"]:checked');
         const bedSelected = form.querySelector('input[name="bedrooms"]:checked');
         const bathSelected = form.querySelector('input[name="bathrooms"]:checked');
-
-        // Enable continue button only when all three are selected
         continueBtn.disabled = !(sqftSelected && bedSelected && bathSelected);
     }
 
@@ -241,24 +235,20 @@
             alert('Please make a selection in each category.');
             return;
         }
-
+        // This now saves the cleaner 'Small', 'Medium', 'Large' values
         const selections = {
             squareFootage: form.querySelector('input[name="square_footage"]:checked').value,
             bedrooms: form.querySelector('input[name="bedrooms"]:checked').value,
             bathrooms: form.querySelector('input[name="bathrooms"]:checked').value,
         };
-
         sessionStorage.setItem('aduDetails', JSON.stringify(selections));
-        console.log('Saved data:', selections);
         window.location.href = "step5.html";
     }
 
-    // --- Initial Setup ---
     document.addEventListener('DOMContentLoaded', () => {
-        // Set the initial state: only the first section is active
         sectionBed.classList.add('is-inactive');
         sectionBath.classList.add('is-inactive');
-        checkFormCompletion(); // Disable the continue button initially
+        checkFormCompletion();
     });
 </script>
 </body>
