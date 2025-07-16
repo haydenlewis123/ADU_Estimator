@@ -208,5 +208,35 @@
       </div>
     </form>
   </div>
+  <script>
+  const form = document.querySelector('.form-box');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // Stop page reload
+
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const notes = document.getElementById("notes").value.trim();
+    const agreed = document.getElementById("terms").checked;
+
+    if (!firstName || !lastName || !email || !phone || !agreed) {
+      alert("Please fill out all required fields and agree to the terms.");
+      return;
+    }
+
+    // Save data to sessionStorage
+    sessionStorage.setItem("firstName", firstName);
+    sessionStorage.setItem("lastName", lastName);
+    sessionStorage.setItem("email", email);
+    sessionStorage.setItem("phone", phone);
+    sessionStorage.setItem("notes", notes);
+
+    // Go to step 7
+    window.location.href = "step7.html";
+  });
+</script>
+
 </body>
 </html>
