@@ -54,7 +54,8 @@
             position: relative; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center;
             padding: 1rem; border: 1px solid var(--border-color);
-            border-radius: 12px; cursor: pointer; transition: all 0.25s ease; height: 100%;
+            border-radius: 10px; /* REFINED: Edge roundness adjusted */
+            cursor: pointer; transition: all 0.25s ease; height: 100%;
         }
         .choice-label:hover { border-color: var(--accent-color); transform: translateY(-2px); }
         .choice-group input[type="radio"]:checked + .choice-label {
@@ -77,27 +78,21 @@
         }
         .choice-group input[type="radio"]:checked + .choice-label .checkmark { opacity: 1; transform: scale(1); }
 
-        /* --- REDESIGNED: Professional Summary Panel --- */
+        /* --- REDESIGNED: Summary Panel --- */
         .live-summary {
             background-color: var(--background-color);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1rem 1.5rem; /* Adjusted padding */
+            border-radius: 10px;
+            padding: 1.25rem;
             margin-top: 2rem;
             opacity: 0;
             transform: translateY(10px);
             transition: opacity 0.4s ease, transform 0.4s ease;
             visibility: hidden;
         }
-        .live-summary.visible {
-            opacity: 1;
-            transform: translateY(0);
-            visibility: visible;
-        }
+        .live-summary.visible { opacity: 1; transform: translateY(0); visibility: visible; }
 
-        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; } /* Better spacing */
-        .summary-item { display: flex; align-items: flex-start; gap: 0.75rem; } /* Changed to flex-start */
-        .summary-icon { width: 24px; height: 24px; color: var(--accent-color); flex-shrink: 0; margin-top: 2px; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
         .summary-label { font-size: 0.75rem; font-weight: 600; color: var(--secondary-text); text-transform: uppercase; margin-bottom: 0.25rem; display: block; }
         .summary-value { font-size: 1rem; font-weight: 500; color: var(--primary-text); display: block; line-height: 1.2; }
         
@@ -112,8 +107,6 @@
 
 <svg width="0" height="0" style="position:absolute">
   <symbol id="icon-size" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M2.5 2.5A2.5 2.5 0 0 0 0 5v10a2.5 2.5 0 0 0 2.5 2.5h15A2.5 2.5 0 0 0 20 15V5a2.5 2.5 0 0 0-2.5-2.5h-15Zm9.53 4.97a.75.75 0 0 1 0 1.06L9.06 11.5l2.97 2.97a.75.75 0 1 1-1.06 1.06l-3.5-3.5a.75.75 0 0 1 0-1.06l3.5-3.5a.75.75 0 0 1 1.06 0ZM7 8.5a.75.75 0 0 1 .75-.75h5a.75.75 0 0 1 0 1.5h-5A.75.75 0 0 1 7 8.5Z" clip-rule="evenodd" /></symbol>
-  <symbol id="icon-bed" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 6.5a.5.5 0 0 0-.5-.5h-15a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5H4v1.5a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V14h1.5a.5.5 0 0 0 .5-.5v-7ZM3 13V7h14v6H3Z" clip-rule="evenodd" /><path d="M5 9.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2Z" /></symbol>
-  <symbol id="icon-bath" viewBox="0 0 20 20" fill="currentColor"><path d="M7.788 2.212a.75.75 0 0 1 1.06 0l1.25 1.25a.75.75 0 0 1-1.06 1.06L7.788 3.272a.75.75 0 0 1 0-1.06Z" /><path d="m11.121 4.243 2.122 2.121a.75.75 0 0 1-1.061 1.06L10.06 5.304a.75.75 0 0 1 1.06-1.061ZM5.5 11.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" /><path fill-rule="evenodd" d="M4 11.5a3.5 3.5 0 1 1 7 0c0 .357-.052.703-.15 1.036a.75.75 0 0 1-1.458-.364A3.033 3.033 0 0 0 9.5 11.5a2.001 2.001 0 0 1-4 0c0 .484.095.945.27 1.374a.75.75 0 0 1-1.44 0A3.493 3.493 0 0 1 4 11.5Z" clip-rule="evenodd" /><path d="M12.962 10.32a.75.75 0 0 1 1.054.1l1.5 1.75a.75.75 0 0 1-1.152.98L12.962 11.32a.75.75 0 0 1-.1-1.053Zm2.25 4.43a.75.75 0 0 1 1.054.1l1.5 1.75a.75.75 0 1 1-1.152.98l-1.402-1.636a.75.75 0 0 1 .1-1.054l-.001-.001ZM15.212 14a.75.75 0 0 1 .1 1.054l-1.5 1.75a.75.75 0 1 1-1.152-.98l1.402-1.636a.75.75 0 0 1 1.152-.188Z" /></symbol>
   <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></symbol>
 </svg>
 
@@ -160,21 +153,277 @@
             <div id="summary-panel" class="live-summary">
                 <div class="summary-grid">
                     <div class="summary-item">
-                        <svg class="summary-icon"><use xlink:href="#icon-size"></use></svg>
                         <div class="summary-text-content">
                             <div class="summary-label">Square Footage</div>
                             <div id="summary-sqft" class="summary-value">—</div>
                         </div>
                     </div>
                     <div class="summary-item">
-                        <svg class="summary-icon"><use xlink:href="#icon-bed"></use></svg>
                         <div class="summary-text-content">
                             <div class="summary-label">Bedrooms</div>
                             <div id="summary-bed" class="summary-value">—</div>
                         </div>
                     </div>
                     <div class="summary-item">
-                        <svg class="summary-icon"><use xlink:href="#icon-bath"></use></svg>
+                        <div class="summary-text-content">
+                            <div class="summary-label">Bathrooms</div>
+                            <div id="summary-bath" class="summary-value">—</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="btn-footer">
+                <button type="button" class="footer-btn btn-back" onclick="goBack()">Back</button>
+                <button type="button" class="footer-btn btn-continue" onclick="goNext()">Continue</button>
+            </footer>
+        </form>
+    </main>
+</div>
+
+<script>
+    const form = document.getElementById('details-form');
+    const stepsContainer = document.querySelector('.form-steps-container');
+    const backBtn = document.querySelector('.btn-back');
+    const continueBtn = document.querySelector('.btn-continue');
+    const summaryPanel = document.getElementById('summary-panel');
+    const totalSteps = 3;
+    let currentStep = 0;
+
+    form.addEventListener('change', (e) => {
+        if (e.target.type === 'radio') {
+            updateSummary();
+            setTimeout(() => {
+                if (currentStep < totalSteps - 1) {
+                    navigateToStep(currentStep + 1);
+                }
+            }, 300);
+        }
+    });
+
+    function navigateToStep(stepIndex) {
+        currentStep = stepIndex;
+        const offset = -currentStep * (100 / totalSteps);
+        stepsContainer.style.transform = `translateX(${offset}%)`;
+        
+        backBtn.style.visibility = currentStep > 0 ? 'visible' : 'hidden';
+        continueBtn.style.display = currentStep === totalSteps - 1 ? 'inline-block' : 'none';
+    }
+
+    function updateSummary() {
+        const sqftInput = form.querySelector('input[name="square_footage"]:checked');
+        const bedInput = form.querySelector('input[name="bedrooms"]:checked');
+        const bathInput = form.querySelector('input[name="bathrooms"]:checked');
+
+        if (sqftInput) {
+            summaryPanel.classList.add('visible');
+            document.getElementById('summary-sqft').textContent = sqftInput.value;
+        }
+        if (bedInput) {
+            document.getElementById('summary-bed').textContent = bedInput.value;
+        }
+        if (bathInput) {
+            document.getElementById('summary-bath').textContent = bathInput.value;
+        }
+    }
+
+    function goBack() {
+        if (currentStep > 0) {
+            navigateToStep(currentStep - 1);
+        } else {
+            window.location.href = "step3.html";
+        }
+    }
+
+    function goNext() {
+        const sqftInput = form.querySelector('input[name="square_footage"]:checked');
+        const bedInput = form.querySelector('input[name="bedrooms"]:checked');
+        const bathInput = form.querySelector('input[name="bathrooms"]:checked');
+
+        if (!sqftInput || !bedInput || !bathInput) {
+            alert('Please complete all selections to continue.');
+            return;
+        }
+
+        const selections = {
+            squareFootage: `${sqftInput.value} (${sqftInput.dataset.desc})`,
+            bedrooms: bedInput.value,
+            bathrooms: bathInput.value,
+        };
+        sessionStorage.setItem('aduDetails', JSON.stringify(selections));
+        window.location.href = "step5.html";
+    }
+
+    document.addEventListener('DOMContentLoaded', () => navigateToStep(0));
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADU Estimator - Step 4: Size Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-text: #1F2937;
+            --secondary-text: #6B7280;
+            --accent-color: #e83038;
+            --accent-light: #fef2f2;
+            --border-color: #D1D5DB;
+            --background-color: #F9FAFB;
+            --card-color: #FFFFFF;
+            --font: 'Inter', sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+        body {
+            font-family: var(--font);
+            background-color: var(--card-color);
+            color: var(--primary-text);
+            display: flex;
+            justify-content: center;
+            padding: 1.5rem 1rem;
+            min-height: 100vh;
+        }
+        
+        .container { width: 100%; max-width: 800px; }
+
+        .progress-header { margin-bottom: 2rem; }
+        .step-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; font-size: 0.875rem; color: var(--secondary-text); }
+        .progress-bar { width: 100%; height: 8px; background-color: #E5E7EB; border-radius: 4px; overflow: hidden; }
+        .progress-bar-fill { width: 66.6%; height: 100%; background-color: var(--accent-color); border-radius: 4px; transition: width 0.4s ease; }
+
+        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--secondary-text); margin-bottom: 1.5rem; font-size: 1rem; max-width: 600px; }
+        
+        .details-form { border-top: 1px solid var(--border-color); padding-top: 1.5rem; overflow: hidden; }
+        .form-steps-container { display: flex; width: 300%; transition: transform 0.5s cubic-bezier(0.45, 0, 0.55, 1); }
+        .form-step { width: calc(100% / 3); flex-shrink: 0; padding: 0.25rem 1rem 0.25rem 0; }
+
+        .section-title { font-weight: 600; margin-bottom: 1rem; font-size: 1.1rem; }
+        
+        .choice-group { display: grid; gap: 0.75rem; }
+        .sqft-group { grid-template-columns: repeat(3, 1fr); }
+        .bed-bath-group { grid-template-columns: repeat(2, 1fr); }
+        .choice-group input[type="radio"] { display: none; }
+        
+        .choice-label {
+            position: relative; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center;
+            padding: 1rem; border: 1px solid var(--border-color);
+            border-radius: 10px; /* REFINED: Edge roundness adjusted */
+            cursor: pointer; transition: all 0.25s ease; height: 100%;
+        }
+        .choice-label:hover { border-color: var(--accent-color); transform: translateY(-2px); }
+        .choice-group input[type="radio"]:checked + .choice-label {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px var(--accent-color);
+            background-color: var(--accent-light);
+            transform: scale(1.02);
+        }
+
+        .choice-icon { width: 28px; height: 28px; margin-bottom: 0.5rem; color: var(--secondary-text); transition: color 0.2s ease; }
+        .choice-group input[type="radio"]:checked + .choice-label .choice-icon { color: var(--accent-color); }
+        .choice-title { font-weight: 500; }
+        .choice-subtitle { font-size: 0.8rem; color: var(--secondary-text); margin-top: 0.25rem; }
+        
+        .checkmark {
+            position: absolute; top: 8px; right: 8px; width: 20px; height: 20px;
+            background-color: var(--accent-color); color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transform: scale(0.5); transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .choice-group input[type="radio"]:checked + .choice-label .checkmark { opacity: 1; transform: scale(1); }
+
+        /* --- REDESIGNED: Summary Panel --- */
+        .live-summary {
+            background-color: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            visibility: hidden;
+        }
+        .live-summary.visible { opacity: 1; transform: translateY(0); visibility: visible; }
+
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+        .summary-label { font-size: 0.75rem; font-weight: 600; color: var(--secondary-text); text-transform: uppercase; margin-bottom: 0.25rem; display: block; }
+        .summary-value { font-size: 1rem; font-weight: 500; color: var(--primary-text); display: block; line-height: 1.2; }
+        
+        .btn-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+        .footer-btn { padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 600; border-radius: 8px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s ease; }
+        .btn-back { color: var(--secondary-text); background-color: transparent; }
+        .btn-back:hover { background-color: #e5e7eb; }
+        .btn-continue { color: #fff; background-color: var(--accent-color); border-color: var(--accent-color); }
+    </style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="icon-size" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M2.5 2.5A2.5 2.5 0 0 0 0 5v10a2.5 2.5 0 0 0 2.5 2.5h15A2.5 2.5 0 0 0 20 15V5a2.5 2.5 0 0 0-2.5-2.5h-15Zm9.53 4.97a.75.75 0 0 1 0 1.06L9.06 11.5l2.97 2.97a.75.75 0 1 1-1.06 1.06l-3.5-3.5a.75.75 0 0 1 0-1.06l3.5-3.5a.75.75 0 0 1 1.06 0ZM7 8.5a.75.75 0 0 1 .75-.75h5a.75.75 0 0 1 0 1.5h-5A.75.75 0 0 1 7 8.5Z" clip-rule="evenodd" /></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></symbol>
+</svg>
+
+<div class="container">
+    <header class="progress-header">
+        <div class="step-info"><span class="step-label">Step 4 of 6</span><span>66% Complete</span></div>
+        <div class="progress-bar"><div class="progress-bar-fill"></div></div>
+    </header>
+
+    <main>
+        <h1>Tell us about your ADU</h1>
+        <p class="subtitle">We'll use this information to generate your cost estimate. Selections can be changed later.</p>
+
+        <form id="details-form" class="details-form">
+            <div class="form-steps-container">
+                <div class="form-step">
+                    <h2 class="section-title">Square Footage</h2>
+                    <div class="choice-group sqft-group">
+                        <div><input type="radio" id="sqft-small" name="square_footage" value="Small" data-desc="Up to 650 sq ft" required><label for="sqft-small" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><svg class="choice-icon"><use xlink:href="#icon-size"></use></svg><span class="choice-title">Small</span><span class="choice-subtitle">Up to 650 sq ft</span></label></div>
+                        <div><input type="radio" id="sqft-medium" name="square_footage" value="Medium" data-desc="650-900 sq ft"><label for="sqft-medium" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><svg class="choice-icon" style="transform: scale(1.1);"><use xlink:href="#icon-size"></use></svg><span class="choice-title">Medium</span><span class="choice-subtitle">650-900 sq ft</span></label></div>
+                        <div><input type="radio" id="sqft-large" name="square_footage" value="Large" data-desc="Over 900 sq ft"><label for="sqft-large" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><svg class="choice-icon" style="transform: scale(1.2);"><use xlink:href="#icon-size"></use></svg><span class="choice-title">Large</span><span class="choice-subtitle">Over 900 sq ft</span></label></div>
+                    </div>
+                </div>
+                <div class="form-step">
+                    <h2 class="section-title">Bedrooms</h2>
+                    <div class="choice-group bed-bath-group">
+                        <div><input type="radio" id="bed-studio" name="bedrooms" value="Studio" required><label for="bed-studio" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">Studio</span></label></div>
+                        <div><input type="radio" id="bed-1" name="bedrooms" value="1 Bedroom"><label for="bed-1" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">1 Bedroom</span></label></div>
+                        <div><input type="radio" id="bed-2" name="bedrooms" value="2 Bedrooms"><label for="bed-2" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">2 Bedrooms</span></label></div>
+                        <div><input type="radio" id="bed-3" name="bedrooms" value="3+ Bedrooms"><label for="bed-3" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">3+ Bedrooms</span></label></div>
+                    </div>
+                </div>
+                <div class="form-step">
+                    <h2 class="section-title">Bathrooms</h2>
+                    <div class="choice-group bed-bath-group">
+                        <div><input type="radio" id="bath-1" name="bathrooms" value="1 Bath" required><label for="bath-1" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">1 Bath</span></label></div>
+                        <div><input type="radio" id="bath-1.5" name="bathrooms" value="1.5 Baths"><label for="bath-1.5" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">1.5 Baths</span></label></div>
+                        <div><input type="radio" id="bath-2" name="bathrooms" value="2 Baths"><label for="bath-2" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">2 Baths</span></label></div>
+                        <div><input type="radio" id="bath-2+" name="bathrooms" value="2+ Baths"><label for="bath-2+" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">2+ Baths</span></label></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="summary-panel" class="live-summary">
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-text-content">
+                            <div class="summary-label">Square Footage</div>
+                            <div id="summary-sqft" class="summary-value">—</div>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-text-content">
+                            <div class="summary-label">Bedrooms</div>
+                            <div id="summary-bed" class="summary-value">—</div>
+                        </div>
+                    </div>
+                    <div class="summary-item">
                         <div class="summary-text-content">
                             <div class="summary-label">Bathrooms</div>
                             <div id="summary-bath" class="summary-value">—</div>
