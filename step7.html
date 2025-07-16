@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step 7 - Estimate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      color: #111827;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #6b7280;
+      margin-bottom: 24px;
+    }
+
+    .section {
+      margin-bottom: 32px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .estimate-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 8px;
+    }
+
+    .button {
+      background-color: #14532d;
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Your Estimate is Ready!</h1>
+    <p class="subtitle">We've analyzed your project requirements and prepared a personalized estimate.</p>
+
+    <div class="section">
+      <h2>Architectural Planning & Engineering</h2>
+      <div class="estimate-item">
+        <span>Fixed Cost:</span>
+        <span id="fixedCost">$0</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Construction Cost Estimate</h2>
+      <div class="estimate-item">
+        <span>General Contractor:</span>
+        <span id="gcCost">$0 - $0</span>
+      </div>
+      <div class="estimate-item">
+        <span>Owner-Builder:</span>
+        <span id="obCost">$0 - $0</span>
+      </div>
+      <p class="note">Note: This is a preliminary estimate. Final costs may vary based on site conditions, material selections, and contractor bids.</p>
+    </div>
+
+    <button class="button">Book a Free Consult</button>
+  </div>
+
+  <script>
+    // Sample selections from previous steps (in practice, retrieve these from localStorage/sessionStorage or pass through query params)
+    const aduType = localStorage.getItem('aduType'); // 'garage', 'basement', 'detached'
+    const sqft = parseInt(localStorage.getItem('squareFootage') || '0');
+
+    let fixedCost = 0;
+    let obMin = 0;
+    let obMax = 0;
+    let gcMin = 0;
+    let gcMax = 0;
+
+    if (aduType === 'garage') {
+      fixedCost = 4425;
+      obMin = 75;
+      obMax = 113;
+      gcMin = 113;
+      gcMax = 188;
+    } else if (aduType === 'basement') {
+      fixedCost = 4425;
+      obMin = 131;
+      obMax = 188;
+      gcMin = 188;
+      gcMax = 263;
+    } else if (aduType === 'detached') {
+      if (sqft <= 900) {
+        fixedCost = 5625;
+      } else {
+        fixedCost = 7125;
+      }
+      obMin = 131;
+      obMax = 188;
+      gcMin = 188;
+      gcMax = 263;
+    }
+
+    document.getElementById('fixedCost').textContent = `$${fixedCost.toLocaleString()}`;
+    document.getElementById('obCost').textContent = `$${obMin} - $${obMax}`;
+    document.getElementById('gcCost').textContent = `$${gcMin} - $${gcMax}`;
+  </script>
+</body>
+
+</html>
