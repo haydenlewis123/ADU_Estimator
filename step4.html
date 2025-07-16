@@ -42,20 +42,11 @@
         .subtitle { color: var(--secondary-text); margin-bottom: 1.5rem; font-size: 1rem; max-width: 600px; }
         
         /* --- Form & Step Styling --- */
-        .details-form { border-top: 1px solid var(--border-color); padding-top: 1.5rem; }
-        
-        .form-section {
-            margin-bottom: 1.5rem;
-            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-        }
+        .details-form { border-top: 1px solid var(--border-color); padding-top: 1.5rem; overflow: hidden; }
+        .form-steps-container { display: flex; transition: transform 0.5s cubic-bezier(0.45, 0, 0.55, 1); }
+        .form-step { width: 100%; flex-shrink: 0; padding: 0.25rem; }
 
-        /* NEW: Deactivated state for sections */
-        .form-section.is-inactive {
-            opacity: 0.4;
-            pointer-events: none;
-            transform: translateY(10px);
-        }
-
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
         .section-title { font-weight: 600; margin-bottom: 1rem; font-size: 1.1rem; color: var(--primary-text); }
 
         /* --- Choice Buttons --- */
@@ -85,7 +76,7 @@
             border-color: var(--accent-color);
             box-shadow: 0 0 0 2px var(--accent-color);
             background-color: var(--accent-light);
-            transform: scale(1.02);
+            transform: scale(1.02); /* Pop animation */
         }
 
         .choice-icon { width: 24px; height: 24px; margin-bottom: 0.5rem; color: var(--secondary-text); transition: color 0.2s ease; }
@@ -93,25 +84,50 @@
         .choice-title { font-weight: 500; color: var(--primary-text); }
         .choice-subtitle { font-size: 0.8rem; color: var(--secondary-text); margin-top: 0.25rem; }
         
+        /* --- Checkmark Icon --- */
         .checkmark {
-            position: absolute; top: 8px; right: 8px; width: 20px; height: 20px;
-            background-color: var(--accent-color); color: white; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; transform: scale(0.5);
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.5);
             transition: opacity 0.25s ease, transform 0.25s ease;
         }
         .choice-group input[type="radio"]:checked + .choice-label .checkmark { opacity: 1; transform: scale(1); }
         
-        /* --- Footer & Buttons --- */
-        .btn-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+        .grid-col-span-2 { grid-column: span 2 / span 2; }
+        
+        /* --- Live Summary --- */
+        .live-summary {
+            background-color: var(--background-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
+        .live-summary p { margin: 0; padding: 0.25rem 0; color: var(--secondary-text); }
+        .live-summary strong { color: var(--primary-text); }
+        .live-summary .summary-item.placeholder { color: #9ca3af; font-style: italic; }
+
+        /* --- Footer --- */
+        .btn-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
         .footer-btn { padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 600; border-radius: 8px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s ease; }
         .btn-back { color: var(--secondary-text); background-color: transparent; }
         .btn-back:hover { background-color: #e5e7eb; }
         .btn-continue { color: #fff; background-color: var(--accent-color); border-color: var(--accent-color); }
         .btn-continue:hover { background-color: #c72a30; border-color: #c72a30; }
-        .btn-continue:disabled { background-color: #FECACA; border-color: #FECACA; cursor: not-allowed; }
         
         /* Responsive */
+        @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } .grid-col-span-2 { grid-column: span 1; } }
         @media (max-width: 480px) { .sqft-group, .bed-bath-group { grid-template-columns: repeat(2, 1fr); } h1 { font-size: 1.75rem; } }
     </style>
 </head>
@@ -138,59 +154,67 @@
         <p class="subtitle">We'll use this information to generate your cost estimate. Selections can be changed later.</p>
 
         <form id="details-form" class="details-form">
-            
-            <section id="section-sqft" class="form-section">
-                <h2 class="section-title">Square Footage</h2>
-                <div class="choice-group sqft-group">
-                    <div>
-                        <input type="radio" id="sqft-small" name="square_footage" value="Up to 650 sq ft" required>
-                        <label for="sqft-small" class="choice-label">
-                            <div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div>
-                            <svg class="choice-icon"><use xlink:href="#icon-house"></use></svg>
-                            <span class="choice-title">Small</span>
-                            <span class="choice-subtitle">Up to 650 sq ft</span>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="radio" id="sqft-medium" name="square_footage" value="650-900 sq ft">
-                        <label for="sqft-medium" class="choice-label">
-                            <div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div>
-                            <svg class="choice-icon" style="transform: scale(1.1);"><use xlink:href="#icon-house"></use></svg>
-                            <span class="choice-title">Medium</span>
-                            <span class="choice-subtitle">650-900 sq ft</span>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="radio" id="sqft-large" name="square_footage" value="Over 900 sq ft">
-                        <label for="sqft-large" class="choice-label">
-                            <div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div>
-                            <svg class="choice-icon" style="transform: scale(1.2);"><use xlink:href="#icon-house"></use></svg>
-                            <span class="choice-title">Large</span>
-                            <span class="choice-subtitle">Over 900 sq ft</span>
-                        </label>
-                    </div>
-                </div>
-            </section>
+            <div class="form-steps-container">
 
-            <section id="section-bed" class="form-section">
-                <h2 class="section-title">Bedrooms</h2>
-                <div class="choice-group bed-bath-group">
-                    <div><input type="radio" id="bed-studio" name="bedrooms" value="Studio" required><label for="bed-studio" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">Studio</span></label></div>
-                    <div><input type="radio" id="bed-1" name="bedrooms" value="1 Bedroom"><label for="bed-1" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">1 Bedroom</span></label></div>
-                    <div><input type="radio" id="bed-2" name="bedrooms" value="2 Bedrooms"><label for="bed-2" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">2 Bedrooms</span></label></div>
-                    <div><input type="radio" id="bed-3" name="bedrooms" value="3+ Bedrooms"><label for="bed-3" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">3+ Bedrooms</span></label></div>
+                <div id="step-1" class="form-step">
+                    <h2 class="section-title">Square Footage</h2>
+                    <div class="choice-group sqft-group">
+                        <div>
+                            <input type="radio" id="sqft-small" name="square_footage" value="Up to 650 sq ft" required>
+                            <label for="sqft-small" class="choice-label">
+                                <div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div>
+                                <svg class="choice-icon"><use xlink:href="#icon-house"></use></svg>
+                                <span class="choice-title">Small</span>
+                                <span class="choice-subtitle">Up to 650 sq ft</span>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="sqft-medium" name="square_footage" value="650-900 sq ft">
+                            <label for="sqft-medium" class="choice-label">
+                                <div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div>
+                                <svg class="choice-icon" style="transform: scale(1.1);"><use xlink:href="#icon-house"></use></svg>
+                                <span class="choice-title">Medium</span>
+                                <span class="choice-subtitle">650-900 sq ft</span>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="sqft-large" name="square_footage" value="Over 900 sq ft">
+                            <label for="sqft-large" class="choice-label">
+                                <div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div>
+                                <svg class="choice-icon" style="transform: scale(1.2);"><use xlink:href="#icon-house"></use></svg>
+                                <span class="choice-title">Large</span>
+                                <span class="choice-subtitle">Over 900 sq ft</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </section>
 
-            <section id="section-bath" class="form-section">
-                <h2 class="section-title">Bathrooms</h2>
-                <div class="choice-group bed-bath-group">
-                    <div><input type="radio" id="bath-1" name="bathrooms" value="1 Bath" required><label for="bath-1" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">1 Bath</span></label></div>
-                    <div><input type="radio" id="bath-1.5" name="bathrooms" value="1.5 Baths"><label for="bath-1.5" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">1.5 Baths</span></label></div>
-                    <div><input type="radio" id="bath-2" name="bathrooms" value="2 Baths"><label for="bath-2" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">2 Baths</span></label></div>
-                    <div><input type="radio" id="bath-2+" name="bathrooms" value="2+ Baths"><label for="bath-2+" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">2+ Baths</span></label></div>
+                <div id="step-2" class="form-step">
+                    <h2 class="section-title">Bedrooms</h2>
+                    <div class="choice-group bed-bath-group">
+                        <div><input type="radio" id="bed-studio" name="bedrooms" value="Studio" required><label for="bed-studio" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">Studio</span></label></div>
+                        <div><input type="radio" id="bed-1" name="bedrooms" value="1 Bedroom"><label for="bed-1" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">1 Bedroom</span></label></div>
+                        <div><input type="radio" id="bed-2" name="bedrooms" value="2 Bedrooms"><label for="bed-2" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">2 Bedrooms</span></label></div>
+                        <div><input type="radio" id="bed-3" name="bedrooms" value="3+ Bedrooms"><label for="bed-3" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">3+ Bedrooms</span></label></div>
+                    </div>
                 </div>
-            </section>
+
+                <div id="step-3" class="form-step">
+                    <h2 class="section-title">Bathrooms</h2>
+                    <div class="choice-group bed-bath-group">
+                        <div><input type="radio" id="bath-1" name="bathrooms" value="1 Bath" required><label for="bath-1" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">1 Bath</span></label></div>
+                        <div><input type="radio" id="bath-1.5" name="bathrooms" value="1.5 Baths"><label for="bath-1.5" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">1.5 Baths</span></label></div>
+                        <div><input type="radio" id="bath-2" name="bathrooms" value="2 Baths"><label for="bath-2" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">2 Baths</span></label></div>
+                        <div><input type="radio" id="bath-2+" name="bathrooms" value="2+ Baths"><label for="bath-2+" class="choice-label"><div class="checkmark"><svg width="12" height="12"><use xlink:href="#icon-check"></use></svg></div><span class="choice-title">2+ Baths</span></label></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="live-summary">
+                <p><span id="summary-sqft" class="summary-item placeholder">Select Square Footage...</span></p>
+                <p><span id="summary-bed" class="summary-item placeholder">Select Bedrooms...</span></p>
+                <p><span id="summary-bath" class="summary-item placeholder">Select Bathrooms...</span></p>
+            </div>
 
             <footer class="btn-footer">
                 <button type="button" class="footer-btn btn-back" onclick="goBack()">Back</button>
@@ -202,50 +226,76 @@
 
 <script>
     const form = document.getElementById('details-form');
+    const stepsContainer = document.querySelector('.form-steps-container');
+    const backBtn = document.querySelector('.btn-back');
     const continueBtn = document.querySelector('.btn-continue');
-    const sectionBed = document.getElementById('section-bed');
-    const sectionBath = document.getElementById('section-bath');
+    let currentStep = 0;
 
     // --- Main Logic: Handle user interaction ---
     form.addEventListener('change', (e) => {
         if (e.target.type === 'radio') {
-            const fieldName = e.target.name;
-
-            // Reveal the next section based on the current selection
-            if (fieldName === 'square_footage') {
-                sectionBed.classList.remove('is-inactive');
-            }
-            if (fieldName === 'bedrooms') {
-                sectionBath.classList.remove('is-inactive');
-            }
-            
-            checkFormCompletion();
+            updateSummary();
+            // Auto-advance to the next step after a brief delay
+            setTimeout(() => {
+                if (currentStep < 2) navigateToStep(currentStep + 1);
+            }, 250);
         }
     });
 
-    function checkFormCompletion() {
+    function navigateToStep(stepIndex) {
+        currentStep = stepIndex;
+        stepsContainer.style.transform = `translateX(-${currentStep * 100}%)`;
+        // Show the back button only if we are not on the first step
+        backBtn.style.visibility = currentStep > 0 ? 'visible' : 'hidden';
+    }
+
+    function updateSummary() {
+        const sqftInput = form.querySelector('input[name="square_footage"]:checked');
+        const bedInput = form.querySelector('input[name="bedrooms"]:checked');
+        const bathInput = form.querySelector('input[name="bathrooms"]:checked');
+
+        const sqftSummary = document.getElementById('summary-sqft');
+        const bedSummary = document.getElementById('summary-bed');
+        const bathSummary = document.getElementById('summary-bath');
+
+        if (sqftInput) {
+            sqftSummary.textContent = `Size: ${sqftInput.value}`;
+            sqftSummary.classList.remove('placeholder');
+        }
+        if (bedInput) {
+            bedSummary.textContent = `Bedrooms: ${bedInput.value}`;
+            bedSummary.classList.remove('placeholder');
+        }
+        if (bathInput) {
+            bathSummary.textContent = `Bathrooms: ${bathInput.value}`;
+            bathSummary.classList.remove('placeholder');
+        }
+    }
+
+    function goBack() {
+        if (currentStep > 0) {
+            navigateToStep(currentStep - 1);
+        } else {
+            // If on the first step, go to the previous HTML page
+            window.location.href = "step3.html";
+        }
+    }
+
+    function goNext() {
+        // Check if all selections are made
         const sqftSelected = form.querySelector('input[name="square_footage"]:checked');
         const bedSelected = form.querySelector('input[name="bedrooms"]:checked');
         const bathSelected = form.querySelector('input[name="bathrooms"]:checked');
 
-        // Enable continue button only when all three are selected
-        continueBtn.disabled = !(sqftSelected && bedSelected && bathSelected);
-    }
-
-    function goBack() {
-        window.location.href = "step3.html";
-    }
-
-    function goNext() {
-        if (continueBtn.disabled) {
-            alert('Please make a selection in each category.');
+        if (!sqftSelected || !bedSelected || !bathSelected) {
+            alert('Please make a selection in each category to continue.');
             return;
         }
 
         const selections = {
-            squareFootage: form.querySelector('input[name="square_footage"]:checked').value,
-            bedrooms: form.querySelector('input[name="bedrooms"]:checked').value,
-            bathrooms: form.querySelector('input[name="bathrooms"]:checked').value,
+            squareFootage: sqftSelected.value,
+            bedrooms: bedSelected.value,
+            bathrooms: bathSelected.value,
         };
 
         sessionStorage.setItem('aduDetails', JSON.stringify(selections));
@@ -255,10 +305,7 @@
 
     // --- Initial Setup ---
     document.addEventListener('DOMContentLoaded', () => {
-        // Set the initial state: only the first section is active
-        sectionBed.classList.add('is-inactive');
-        sectionBath.classList.add('is-inactive');
-        checkFormCompletion(); // Disable the continue button initially
+        navigateToStep(0); // Start at the first question
     });
 </script>
 </body>
