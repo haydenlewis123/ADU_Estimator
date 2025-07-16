@@ -1,241 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Step 6 – Contact Info</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-text: #1F2937;
-      --secondary-text: #6B7280;
-      --accent-color: #e83038;
-      --accent-light: #fef2f2;
-      --border-color: #D1D5DB;
-      --font: 'Inter', sans-serif;
-    }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: var(--font);
-      background-color: #fff;
-      color: var(--primary-text);
-      display: flex;
-      justify-content: center;
-      padding: 2rem 1rem;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 700px;
-    }
-
-    .step-info {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.875rem;
-      margin-bottom: 0.5rem;
-      color: var(--secondary-text);
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 6px;
-      background-color: #E5E7EB;
-      border-radius: 4px;
-      overflow: hidden;
-      margin-bottom: 2rem;
-    }
-
-    .progress-fill {
-      width: 80%;
-      height: 100%;
-      background-color: var(--accent-color);
-      transition: width 0.4s ease;
-    }
-
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    p.subtitle {
-      color: var(--secondary-text);
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .form-box {
-      background: #fff;
-      border: 1px solid #E5E7EB;
-      border-radius: 12px;
-      padding: 2rem;
-    }
-
-    label {
-      display: block;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-    }
-
-    .input-row {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .input-col {
-      flex: 1;
-    }
-
-    .input-field {
-      font-family: var(--font);
-      font-size: 1rem;
-      padding: 0.75rem;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      width: 100%;
-      box-sizing: border-box;
-      margin-top: 0.25rem;
-    }
-
-    .checkbox-row {
-      margin: 1.25rem 0;
-      font-size: 0.875rem;
-      color: var(--secondary-text);
-    }
-
-    .checkbox-row input {
-      margin-right: 0.5rem;
-    }
-
-    .footer-buttons {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 2rem;
-    }
-
-    .btn {
-      padding: 0.75rem 1.5rem;
-      font-weight: 600;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-back {
-      background: transparent;
-      color: var(--secondary-text);
-    }
-
-    .btn-back:hover {
-      background-color: #F3F4F6;
-    }
-
-    .btn-submit {
-      background-color: var(--accent-color);
-      color: #fff;
-    }
-
-    .btn-submit:hover {
-      background-color: #c72a30;
-    }
-
-    @media (max-width: 600px) {
-      .input-row {
-        flex-direction: column;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Step 6 – Contact Info</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-text: #1F2937; --secondary-text: #6B7280;
+            --accent-color: #e83038; --accent-light: #fef2f2;
+            --border-color: #D1D5DB; --font: 'Inter', sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font); background-color: #fff; color: var(--primary-text);
+            display: flex; justify-content: center; padding: 2rem 1rem;
+        }
+        .container { width: 100%; max-width: 700px; }
+        .step-info { display: flex; justify-content: space-between; font-size: 0.875rem; margin-bottom: 0.5rem; color: var(--secondary-text); }
+        .progress-bar { width: 100%; height: 6px; background-color: #E5E7EB; border-radius: 4px; overflow: hidden; margin-bottom: 2rem; }
+        .progress-fill { width: 100%; height: 100%; background-color: var(--accent-color); }
+        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        p.subtitle { color: var(--secondary-text); font-size: 1rem; margin-bottom: 1.5rem; }
+        .form-box { border: 1px solid #E5E7EB; border-radius: 12px; padding: 2rem; }
+        label { display: block; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .input-row { display: flex; gap: 1rem; margin-bottom: 1.5rem; }
+        .input-col { flex: 1; }
+        .input-field {
+            font-family: var(--font); font-size: 1rem; padding: 0.75rem;
+            border: 1px solid var(--border-color); border-radius: 8px;
+            width: 100%; box-sizing: border-box;
+        }
+        .footer-buttons { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+        .btn { padding: 0.75rem 1.5rem; font-weight: 600; font-size: 1rem; border-radius: 8px; border: none; cursor: pointer; transition: all 0.2s ease; }
+        .btn-back { background: transparent; color: var(--secondary-text); }
+        .btn-submit { background-color: var(--accent-color); color: #fff; }
+        .btn-submit:disabled { background-color: #fca5a5; cursor: not-allowed; }
+        @media (max-width: 600px) { .input-row { flex-direction: column; } }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="step-info">
-      <span>Step 5 of 6</span>
-      <span>80% Complete</span>
+    <div class="container">
+        <div class="step-info"><span>Step 6 of 6</span><span>100% Complete</span></div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+
+        <h1>Last Step!</h1>
+        <p class="subtitle">Enter your contact information to get your personalized estimate.</p>
+
+        <form id="contact-form" class="form-box">
+            <div class="input-row">
+                <div class="input-col">
+                    <label for="firstName">First Name *</label>
+                    <input class="input-field" type="text" id="firstName" required>
+                </div>
+                <div class="input-col">
+                    <label for="lastName">Last Name *</label>
+                    <input class="input-field" type="text" id="lastName" required>
+                </div>
+            </div>
+            <div class="input-row">
+                <div class="input-col">
+                    <label for="email">Email *</label>
+                    <input class="input-field" type="email" id="email" required>
+                </div>
+                <div class="input-col">
+                    <label for="phone">Phone *</label>
+                    <input class="input-field" type="tel" id="phone" required>
+                </div>
+            </div>
+            <div>
+                <label for="notes">Additional Information</label>
+                <textarea class="input-field" id="notes" rows="3"></textarea>
+            </div>
+            <div class="footer-buttons">
+                <button type="button" class="btn btn-back" onclick="window.location.href='step5.html'">Back</button>
+                <button type="submit" class="btn btn-submit" id="submit-button">Get My Estimate ✓</button>
+            </div>
+        </form>
     </div>
-    <div class="progress-bar"><div class="progress-fill"></div></div>
 
-    <h1>Almost Done!</h1>
-    <p class="subtitle">Enter your contact information to get your personalized estimate</p>
+<script>
+    const contactForm = document.getElementById('contact-form');
+    const submitButton = document.getElementById('submit-button');
+    
+    // Paste the Web App URL you copied from Google Apps Script here
+    const a = 'PASTE_YOUR_WEB_APP_URL_HERE';
 
-    <form class="form-box">
-      <div class="input-row">
-        <div class="input-col">
-          <label for="firstName">First Name *</label>
-          <input class="input-field" type="text" id="firstName" placeholder="First name" required>
-        </div>
-        <div class="input-col">
-          <label for="lastName">Last Name *</label>
-          <input class="input-field" type="text" id="lastName" placeholder="Last name" required>
-        </div>
-      </div>
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault(); // Stop the form from reloading the page
 
-      <div class="input-row">
-        <div class="input-col">
-          <label for="email">Email Address *</label>
-          <input class="input-field" type="email" id="email" placeholder="Your email" required>
-        </div>
-        <div class="input-col">
-          <label for="phone">Phone Number *</label>
-          <input class="input-field" type="tel" id="phone" placeholder="Your phone number" required>
-        </div>
-      </div>
+        // Change button text to show it's working
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
 
-      <div>
-        <label for="notes">Any additional information or special requirements?</label>
-        <textarea class="input-field" id="notes" placeholder="Tell us about any special requirements or questions you have"></textarea>
-      </div>
+        // 1. Gather all data from sessionStorage
+        const aduType = JSON.parse(sessionStorage.getItem('adu_type')) || 'N/A';
+        const aduDetails = JSON.parse(sessionStorage.getItem('aduDetails')) || {};
+        const aduTimeline = JSON.parse(sessionStorage.getItem('aduTimeline')) || 'N/A';
+        
+        // 2. Create the data payload object
+        const data = {
+            firstName: document.getElementById("firstName").value,
+            lastName: document.getElementById("lastName").value,
+            email: document.getElementById("email").value,
+            phone: document.getElementById("phone").value,
+            notes: document.getElementById("notes").value,
+            aduType: aduType,
+            squareFootage: aduDetails.squareFootage || 'N/A',
+            bedrooms: aduDetails.bedrooms || 'N/A',
+            bathrooms: aduDetails.bathrooms || 'N/A',
+            timeline: aduTimeline
+        };
 
-      <div class="checkbox-row">
-        <input type="checkbox" id="terms" required>
-        <label for="terms" style="display: inline;">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
-      </div>
-
-      <div class="footer-buttons">
-        <button type="button" class="btn btn-back" onclick="window.history.back()">Back</button>
-        <button type="submit" class="btn btn-submit">Get My Estimate ✓</button>
-      </div>
-    </form>
-  </div>
-  <script>
-  const form = document.querySelector('.form-box');
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault(); // Stop page reload
-
-    const firstName = document.getElementById("firstName").value.trim();
-    const lastName = document.getElementById("lastName").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const notes = document.getElementById("notes").value.trim();
-    const agreed = document.getElementById("terms").checked;
-
-    if (!firstName || !lastName || !email || !phone || !agreed) {
-      alert("Please fill out all required fields and agree to the terms.");
-      return;
-    }
-
-    // Save data to sessionStorage
-    sessionStorage.setItem("firstName", firstName);
-    sessionStorage.setItem("lastName", lastName);
-    sessionStorage.setItem("email", email);
-    sessionStorage.setItem("phone", phone);
-    sessionStorage.setItem("notes", notes);
-
-    // Go to step 7
-    window.location.href = "step7.html";
-  });
+        // 3. Send the data to your Google Apps Script
+        fetch(a, {
+            method: 'POST',
+            mode: 'no-cors', // Important for sending data from a browser
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            // The request was sent. Now, go to the final estimate page.
+            window.location.href = 'step7.html';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting your information. Please try again.');
+            // Re-enable the button if there's an error
+            submitButton.disabled = false;
+            submitButton.textContent = 'Get My Estimate ✓';
+        });
+    });
 </script>
 
 </body>
