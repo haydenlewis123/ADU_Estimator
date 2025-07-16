@@ -1,175 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ADU Estimator – Step 7</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 7 – Estimate Ready</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-color: #1f2937;
-      --secondary-color: #6b7280;
-      --accent-color: #e63946;
-      --accent-hover: #c72a30;
-      --background-color: #f9fafb;
-      --card-color: #ffffff;
-      --border-color: #e5e7eb;
+      --primary-text: #1F2937;
+      --secondary-text: #6B7280;
+      --accent-color: #e83038;
+      --accent-light: #fef2f2;
+      --border-color: #D1D5DB;
       --font: 'Inter', sans-serif;
+      --success-green: #059669;
+      --success-light: #ECFDF5;
     }
 
     body {
       font-family: var(--font);
-      background-color: var(--background-color);
-      color: var(--primary-color);
       margin: 0;
+      padding: 2rem 1rem;
+      background: white;
+      color: var(--primary-text);
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 2.5rem 1rem;
     }
 
     .container {
-      max-width: 720px;
+      max-width: 800px;
       width: 100%;
-      background: var(--card-color);
-      border-radius: 20px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-      padding: 3rem;
     }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
+    .step-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      color: var(--secondary-text);
+      margin-bottom: 0.5rem;
     }
 
-    p.subtitle {
-      font-size: 1rem;
-      color: var(--secondary-color);
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background-color: #E5E7EB;
+      border-radius: 4px;
+      overflow: hidden;
       margin-bottom: 2rem;
     }
 
-    label {
-      font-weight: 600;
-      display: block;
-      margin-top: 1.5rem;
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
+    .progress-fill {
+      width: 100%;
+      height: 100%;
+      background-color: var(--accent-color);
     }
 
-    input, textarea {
-      width: 100%;
-      padding: 0.85rem 1.2rem;
-      border-radius: 14px;
-      border: 1px solid var(--border-color);
+    .checkmark {
+      background-color: var(--success-light);
+      color: var(--success-green);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .card {
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.125rem;
+    }
+
+    .fixed-cost {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0.5rem 0;
+    }
+
+    .estimate-section {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .estimate-box {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
       font-size: 1rem;
-      background-color: #fff;
-      transition: border 0.3s ease;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-block;
+      margin-top: 1rem;
     }
 
-    input:focus, textarea:focus {
-      border-color: var(--accent-color);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.15);
-    }
-
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-
-    button {
-      margin-top: 2.5rem;
-      width: 100%;
-      padding: 1rem 1.5rem;
-      font-size: 1.05rem;
-      font-weight: 600;
+    .btn-consult {
       background-color: var(--accent-color);
       color: #fff;
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
     }
 
-    button:hover {
-      background-color: var(--accent-hover);
+    .btn-consult:hover {
+      background-color: #c72a30;
     }
 
-    @media (max-width: 600px) {
-      .container {
-        padding: 2rem;
-      }
+    .btn-feasibility {
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      background: white;
+    }
 
-      h1 {
-        font-size: 1.65rem;
-      }
+    .btn-feasibility:hover {
+      background: var(--accent-light);
+    }
+
+    .note {
+      font-size: 0.875rem;
+      color: var(--secondary-text);
+      margin-top: 0.5rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      margin: 0.5rem 0;
+    }
+
+    ul li {
+      margin-bottom: 0.25rem;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <h1>Almost Done!</h1>
-    <p class="subtitle">Tell us how to reach you, and we’ll share your personalized estimate.</p>
+    <div class="step-info">
+      <span>Step 6 of 6</span>
+      <span>100% Complete</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
 
-    <form id="contact-form">
-      <label for="firstName">First Name</label>
-      <input type="text" id="firstName" required>
+    <div class="checkmark">✓ Your Estimate is Ready!</div>
+    <p>We've analyzed your project requirements and prepared a personalized estimate.</p>
 
-      <label for="lastName">Last Name</label>
-      <input type="text" id="lastName" required>
+    <div class="estimate-section">
+      <div class="estimate-box card">
+        <h3>Architectural Planning & Engineering</h3>
+        <p>Fixed Cost:</p>
+        <div class="fixed-cost" id="fixedCost">$7,500</div>
+        <p><strong>Payment Plan:</strong><br>$1,250/month for 6 months</p>
+        <p><a href="#">Split your architectural fee into easy monthly payments</a></p>
+        <p>Services Included:</p>
+        <ul>
+          <li>✓ Preliminary Design Consultation</li>
+          <li>✓ Architectural Drawing & Plans</li>
+          <li>✓ Structural Engineering</li>
+          <li>✓ Permit Application Assistance</li>
+        </ul>
+      </div>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" required>
+      <div class="estimate-box card">
+        <h3>Construction Cost Estimate</h3>
+        <p><strong>General Contractor:</strong><br>$200 - $300 per square foot</p>
+        <p><strong>Owner-Builder:</strong><br>$175 - $250 per square foot</p>
+        <p class="note">Note: This is a preliminary estimate. Final costs may vary based on site conditions, material selections, and contractor bids.</p>
+      </div>
+    </div>
 
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" placeholder="Optional">
-
-      <label for="notes">Anything you'd like us to know?</label>
-      <textarea id="notes" placeholder="Optional..."></textarea>
-
-      <button type="submit">Submit & View Estimate</button>
-    </form>
+    <button class="btn btn-consult">Book a Free Consult</button>
+    <button class="btn btn-feasibility">Get Feasibility Report</button>
   </div>
-
-  <script>
-    const form = document.getElementById('contact-form');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const data = {
-        firstName: document.getElementById("firstName").value,
-        lastName: document.getElementById("lastName").value,
-        email: document.getElementById("email").value,
-        phone: document.getElementById("phone").value,
-        notes: document.getElementById("notes").value,
-        aduType: sessionStorage.getItem("aduType"),
-        squareFootage: sessionStorage.getItem("squareFootage"),
-        bedrooms: sessionStorage.getItem("bedrooms"),
-        bathrooms: sessionStorage.getItem("bathrooms")
-      };
-
-      fetch("YOUR_GOOGLE_WEBAPP_URL", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = "thankyou.html";
-        } else {
-          alert("Submission failed. Please try again.");
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert("There was a problem submitting your form.");
-      });
-    });
-  </script>
-
 </body>
 </html>
