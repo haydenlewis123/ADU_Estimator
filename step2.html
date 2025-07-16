@@ -186,23 +186,28 @@
   </div>
 
   <script>
+    let selectedValue = null;
+
     function selectOption(el) {
-      document.querySelectorAll('.option').forEach(opt => opt.classList.remove('active'));
-      el.classList.add('active');
-      sessionStorage.setItem('aduType', el.querySelector('.option-title').innerText);
+        document.querySelectorAll('.option').forEach(opt => opt.classList.remove('active'));
+        el.classList.add('active');
+        // Get the text from the title div
+        selectedValue = el.querySelector('.option-title').innerText;
     }
 
     function goBack() {
-      window.location.href = "index.html";
+        window.location.href = "index.html"; // Or step1.html
     }
 
     function goNext() {
-      if (!sessionStorage.getItem('aduType')) {
-        alert('Please select an ADU type.');
-        return;
-      }
-      window.location.href = "step3.html";
+        if (!selectedValue) {
+            alert('Please select an ADU type.');
+            return;
+        }
+        // Save with the correct key 'adu_type' and as a JSON string
+        sessionStorage.setItem('adu_type', JSON.stringify(selectedValue));
+        window.location.href = "step3.html";
     }
-  </script>
+</script>
 </body>
 </html>
