@@ -1,183 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ADU Estimator - Step 4</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-color: #0b0c10;
-      --accent-color: #e63946;
-      --accent-hover: #ba1e2e;
-      --light-gray: #f8f9fa;
-      --gray: #dee2e6;
-      --font: 'Inter', sans-serif;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADU Estimator - Step 4: Size Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-text: #1F2937;
+            --secondary-text: #6B7280;
+            --accent-color: #e83038;
+            --accent-light: #fef2f2;
+            --border-color: #D1D5DB;
+            --background-color: #F9FAFB;
+            --card-color: #FFFFFF;
+            --font: 'Inter', sans-serif;
+        }
 
-    body {
-      font-family: var(--font);
-      margin: 0;
-      background: #fff;
-      padding: 2rem;
-      display: flex;
-      justify-content: center;
-    }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+        }
 
-    .container {
-      width: 100%;
-      max-width: 900px;
-    }
+        body {
+            font-family: var(--font);
+            background-color: var(--card-color);
+            color: var(--primary-text);
+            display: flex;
+            justify-content: center;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+        
+        /* Main Container */
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
 
-    .step-label {
-      font-size: 0.9rem;
-      color: #999;
-      margin-bottom: 0.25rem;
-    }
+        /* Progress Bar & Header */
+        .progress-header {
+            margin-bottom: 3rem;
+        }
 
-    h1 {
-      font-size: 2rem;
-      color: var(--primary-color);
-      margin-bottom: 0.5rem;
-    }
+        .step-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--secondary-text);
+        }
 
-    .subtitle {
-      color: #555;
-      margin-bottom: 2rem;
-    }
+        .step-info .step-label {
+            font-weight: 500;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            width: 66.6%; /* Step 4 of 6 */
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 4px;
+            transition: width 0.4s ease;
+        }
 
-    .section {
-      background: var(--light-gray);
-      border: 1px solid var(--gray);
-      border-radius: 14px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-    }
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
 
-    .section-title {
-      font-weight: 600;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      font-size: 1.1rem;
-    }
+        .subtitle {
+            color: var(--secondary-text);
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+            max-width: 600px;
+        }
+        
+        /* Main Form & Grid Layout */
+        .details-form {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+        }
 
-    .button-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            font-size: 1.125rem;
+            color: var(--primary-text);
+        }
 
-    .select-btn {
-      background: #fff;
-      border: 2px solid var(--gray);
-      padding: 1rem;
-      border-radius: 12px;
-      cursor: pointer;
-      flex: 1 1 calc(33.333% - 1rem);
-      min-width: 150px;
-      text-align: center;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
+        /* Radio Button Group Styling */
+        .choice-group {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .sqft-group {
+            grid-template-columns: repeat(3, 1fr);
+        }
 
-    .select-btn:hover {
-      border-color: var(--accent-color);
-    }
+        .bed-bath-group {
+             grid-template-columns: repeat(2, 1fr);
+        }
 
-    .select-btn.selected {
-      border-color: var(--accent-color);
-      background: rgba(230, 57, 70, 0.1);
-    }
+        .choice-group input[type="radio"] {
+            display: none; /* Hide the actual radio button */
+        }
+        
+        .choice-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.25rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            height: 100%;
+        }
 
-    .btn-footer {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 3rem;
-    }
+        .choice-label:hover {
+            border-color: var(--accent-color);
+        }
+        
+        /* This is the magic: style the label when its radio button is checked */
+        .choice-group input[type="radio"]:checked + .choice-label {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px var(--accent-color);
+            background-color: var(--accent-light);
+        }
 
-    button {
-      background: var(--accent-color);
-      color: #fff;
-      border: none;
-      padding: 0.85rem 1.8rem;
-      font-size: 1rem;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s ease;
-    }
+        .choice-icon {
+            width: 28px;
+            height: 28px;
+            margin-bottom: 0.75rem;
+            color: var(--secondary-text);
+            transition: color 0.2s ease;
+        }
+        
+        .choice-group input[type="radio"]:checked + .choice-label .choice-icon {
+            color: var(--accent-color);
+        }
 
-    button:hover {
-      background: var(--accent-hover);
-    }
-  </style>
+        .choice-title {
+            font-weight: 500;
+            color: var(--primary-text);
+        }
+
+        .choice-subtitle {
+            font-size: 0.875rem;
+            color: var(--secondary-text);
+            margin-top: 0.25rem;
+        }
+        
+        .grid-col-span-2 {
+            grid-column: span 2 / span 2;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        /* Footer Buttons */
+        .btn-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-btn {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .btn-back {
+            color: var(--secondary-text);
+            background-color: transparent;
+        }
+        .btn-back:hover {
+            background-color: var(--background-color);
+        }
+
+        .btn-continue {
+            color: #fff;
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        .btn-continue:hover {
+            background-color: #c72a30; /* Darker red */
+            border-color: #c72a30;
+        }
+        .btn-continue:disabled {
+            background-color: #FCA5A5; /* Lighter, disabled red */
+            border-color: #FCA5A5;
+            cursor: not-allowed;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .grid-col-span-2 {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sqft-group, .bed-bath-group {
+                grid-template-columns: 1fr;
+            }
+            h1 { font-size: 1.75rem; }
+        }
+
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="step-label">Step 4 of 6</div>
-    <h1>Tell us about your ADU</h1>
-    <p class="subtitle">We'll use this information to generate your cost estimate</p>
 
-    <div class="section">
-      <div class="section-title">Square Footage</div>
-      <div class="button-group">
-        <div class="select-btn" onclick="selectOption(this, 'square', 'Small')">Small<br><small>Up to 650 sq ft</small></div>
-        <div class="select-btn" onclick="selectOption(this, 'square', 'Medium')">Medium<br><small>650-900 sq ft</small></div>
-        <div class="select-btn" onclick="selectOption(this, 'square', 'Large')">Large<br><small>Over 900 sq ft</small></div>
-      </div>
-    </div>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="icon-house-small" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>
+  </symbol>
+  <symbol id="icon-house-medium" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>
+  </symbol>
+  <symbol id="icon-house-large" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>
+  </symbol>
+</svg>
 
-    <div class="section">
-      <div class="section-title">Bedrooms</div>
-      <div class="button-group">
-        <div class="select-btn" onclick="selectOption(this, 'bed', 'Studio')">Studio</div>
-        <div class="select-btn" onclick="selectOption(this, 'bed', '1 Bedroom')">1 Bedroom</div>
-        <div class="select-btn" onclick="selectOption(this, 'bed', '2 Bedrooms')">2 Bedrooms</div>
-        <div class="select-btn" onclick="selectOption(this, 'bed', '3+ Bedrooms')">3+ Bedrooms</div>
-      </div>
-    </div>
+<div class="container">
+    <header class="progress-header">
+        <div class="step-info">
+            <span class="step-label">Step 4 of 6</span>
+            <span>66% Complete</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+        </div>
+    </header>
 
-    <div class="section">
-      <div class="section-title">Bathrooms</div>
-      <div class="button-group">
-        <div class="select-btn" onclick="selectOption(this, 'bath', '1 Bath')">1 Bath</div>
-        <div class="select-btn" onclick="selectOption(this, 'bath', '1.5 Baths')">1.5 Baths</div>
-        <div class="select-btn" onclick="selectOption(this, 'bath', '2 Baths')">2 Baths</div>
-        <div class="select-btn" onclick="selectOption(this, 'bath', '2+ Baths')">2+ Baths</div>
-      </div>
-    </div>
+    <main>
+        <h1>Tell us about your ADU</h1>
+        <p class="subtitle">We'll use this information to generate your cost estimate. Selections can be changed later.</p>
 
-    <div class="btn-footer">
-      <button onclick="goBack()">Back</button>
-      <button onclick="goNext()">Continue</button>
-    </div>
-  </div>
+        <form id="details-form" class="details-form">
+            <div class="form-grid">
+                <section class="grid-col-span-2">
+                    <h2 class="section-title">Square Footage</h2>
+                    <div class="choice-group sqft-group">
+                        <div>
+                            <input type="radio" id="sqft-small" name="square_footage" value="Small (Up to 650 sq ft)" required>
+                            <label for="sqft-small" class="choice-label">
+                                <svg class="choice-icon"><use xlink:href="#icon-house-small"></use></svg>
+                                <span class="choice-title">Small</span>
+                                <span class="choice-subtitle">Up to 650 sq ft</span>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="sqft-medium" name="square_footage" value="Medium (650-900 sq ft)">
+                            <label for="sqft-medium" class="choice-label">
+                                <svg class="choice-icon" style="transform: scale(1.1);"><use xlink:href="#icon-house-medium"></use></svg>
+                                <span class="choice-title">Medium</span>
+                                <span class="choice-subtitle">650-900 sq ft</span>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="sqft-large" name="square_footage" value="Large (Over 900 sq ft)">
+                            <label for="sqft-large" class="choice-label">
+                                <svg class="choice-icon" style="transform: scale(1.2);"><use xlink:href="#icon-house-large"></use></svg>
+                                <span class="choice-title">Large</span>
+                                <span class="choice-subtitle">Over 900 sq ft</span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
 
-  <script>
-    let selected = { square: '', bed: '', bath: '' };
+                <hr class="grid-col-span-2">
 
-    function selectOption(element, category, value) {
-      selected[category] = value;
-      document.querySelectorAll(`.select-btn`).forEach(btn => {
-        if (btn.innerText.includes(value)) {
-          if (btn.parentElement.parentElement.querySelectorAll('.select-btn').length > 0) {
-            [...btn.parentElement.children].forEach(child => child.classList.remove('selected'));
-          }
-          btn.classList.add('selected');
+                <section>
+                    <h2 class="section-title">Bedrooms</h2>
+                    <div class="choice-group bed-bath-group">
+                        <div>
+                            <input type="radio" id="bed-studio" name="bedrooms" value="Studio" required>
+                            <label for="bed-studio" class="choice-label"><span class="choice-title">Studio</span></label>
+                        </div>
+                        <div>
+                            <input type="radio" id="bed-1" name="bedrooms" value="1 Bedroom">
+                            <label for="bed-1" class="choice-label"><span class="choice-title">1 Bedroom</span></label>
+                        </div>
+                        <div>
+                            <input type="radio" id="bed-2" name="bedrooms" value="2 Bedrooms">
+                            <label for="bed-2" class="choice-label"><span class="choice-title">2 Bedrooms</span></label>
+                        </div>
+                        <div>
+                            <input type="radio" id="bed-3" name="bedrooms" value="3+ Bedrooms">
+                            <label for="bed-3" class="choice-label"><span class="choice-title">3+ Bedrooms</span></label>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="section-title">Bathrooms</h2>
+                    <div class="choice-group bed-bath-group">
+                        <div>
+                            <input type="radio" id="bath-1" name="bathrooms" value="1 Bath" required>
+                            <label for="bath-1" class="choice-label"><span class="choice-title">1 Bath</span></label>
+                        </div>
+                        <div>
+                            <input type="radio" id="bath-1.5" name="bathrooms" value="1.5 Baths">
+                            <label for="bath-1.5" class="choice-label"><span class="choice-title">1.5 Baths</span></label>
+                        </div>
+                        <div>
+                            <input type="radio" id="bath-2" name="bathrooms" value="2 Baths">
+                            <label for="bath-2" class="choice-label"><span class="choice-title">2 Baths</span></label>
+                        </div>
+                        <div>
+                            <input type="radio" id="bath-2+" name="bathrooms" value="2+ Baths">
+                            <label for="bath-2+" class="choice-label"><span class="choice-title">2+ Baths</span></label>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <footer class="btn-footer">
+                <button type="button" class="footer-btn btn-back" onclick="goBack()">Back</button>
+                <button type="button" class="footer-btn btn-continue" id="continue-btn" onclick="goNext()">Continue</button>
+            </footer>
+        </form>
+    </main>
+</div>
+
+<script>
+    const form = document.getElementById('details-form');
+    const continueBtn = document.getElementById('continue-btn');
+
+    // Function to check if all sections have a selection
+    function validateForm() {
+        const sqftSelected = form.querySelector('input[name="square_footage"]:checked');
+        const bedSelected = form.querySelector('input[name="bedrooms"]:checked');
+        const bathSelected = form.querySelector('input[name="bathrooms"]:checked');
+        
+        if (sqftSelected && bedSelected && bathSelected) {
+            continueBtn.disabled = false;
+        } else {
+            continueBtn.disabled = true;
         }
-      });
     }
 
+    // Add event listener to the form to check for changes
+    form.addEventListener('change', validateForm);
+
+    // Initial validation check on page load
+    document.addEventListener('DOMContentLoaded', validateForm);
+
     function goBack() {
-      window.location.href = "step3.html";
+        // Navigate to the previous step
+        window.location.href = "step3.html";
     }
 
     function goNext() {
-      // You can also store these selections for later use:
-      sessionStorage.setItem('adu_step4', JSON.stringify(selected));
-      window.location.href = "step5.html";
+        // Double-check validation before proceeding
+        if (continueBtn.disabled) {
+            alert('Please make a selection in each category.');
+            return;
+        }
+
+        const selections = {
+            squareFootage: form.querySelector('input[name="square_footage"]:checked').value,
+            bedrooms: form.querySelector('input[name="bedrooms"]:checked').value,
+            bathrooms: form.querySelector('input[name="bathrooms"]:checked').value,
+        };
+
+        // Save the data to sessionStorage to be used in the next step
+        sessionStorage.setItem('aduDetails', JSON.stringify(selections));
+        console.log('Saved data:', selections);
+        
+        // Navigate to the next step
+        window.location.href = "step5.html";
     }
-  </script>
+</script>
 </body>
 </html>
