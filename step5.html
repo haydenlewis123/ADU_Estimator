@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADU Estimator - Step 5: Timeline</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-text: #1F2937;
+            --secondary-text: #6B7280;
+            --accent-color: #e83038;
+            --accent-light: #fef2f2;
+            --border-color: #D1D5DB;
+            --background-color: #F9FAFB;
+            --card-color: #FFFFFF;
+            --font: 'Inter', sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+        body {
+            font-family: var(--font);
+            background-color: var(--card-color);
+            color: var(--primary-text);
+            display: flex;
+            justify-content: center;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container { width: 100%; max-width: 700px; }
+
+        .progress-header { margin-bottom: 2rem; }
+        .step-info {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 0.75rem; font-size: 0.875rem; color: var(--secondary-text);
+        }
+        .progress-bar {
+            width: 100%; height: 8px; background-color: #E5E7EB;
+            border-radius: 4px; overflow: hidden;
+        }
+        .progress-bar-fill {
+            width: 80%; height: 100%; background-color: var(--accent-color);
+            border-radius: 4px; transition: width 0.4s ease;
+        }
+
+        h1 {
+            font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: var(--secondary-text); margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .choice-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 1rem; margin-bottom: 2rem;
+        }
+        .option {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .option:hover {
+            border-color: var(--accent-color);
+            background-color: var(--accent-light);
+        }
+        .option.selected {
+            border-color: var(--accent-color);
+            background-color: var(--accent-light);
+            box-shadow: 0 0 0 2px var(--accent-color);
+        }
+        .option-title {
+            font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem;
+        }
+        .option-subtext {
+            font-size: 0.875rem; color: var(--secondary-text);
+        }
+
+        .btn-footer {
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .footer-btn {
+            padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 600;
+            border-radius: 8px; cursor: pointer; border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .btn-back {
+            color: var(--secondary-text); background-color: transparent;
+        }
+        .btn-back:hover { background-color: #e5e7eb; }
+        .btn-continue {
+            color: #fff; background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+        .btn-continue:hover {
+            background-color: #c72a30; border-color: #c72a30;
+        }
+        .btn-continue:disabled {
+            background-color: #FECACA; border-color: #FECACA; cursor: not-allowed;
+        }
+
+        @media (max-width: 500px) {
+            .choice-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="progress-header">
+        <div class="step-info">
+            <span>Step 5 of 6</span>
+            <span>80% Complete</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+        </div>
+    </header>
+
+    <main>
+        <h1>What's your timeline?</h1>
+        <p class="subtitle">When are you looking to start your ADU project?</p>
+
+        <div class="choice-grid" id="timeline-options">
+            <div class="option" data-value="As soon as possible">
+                <div class="option-title">As soon as possible</div>
+                <div class="option-subtext">Ready to begin immediately</div>
+            </div>
+            <div class="option" data-value="1-3 months">
+                <div class="option-title">1–3 months</div>
+                <div class="option-subtext">Planning to start this quarter</div>
+            </div>
+            <div class="option" data-value="3-6 months">
+                <div class="option-title">3–6 months</div>
+                <div class="option-subtext">Planning ahead for later this year</div>
+            </div>
+            <div class="option" data-value="6+ months">
+                <div class="option-title">6+ months</div>
+                <div class="option-subtext">Just researching for future plans</div>
+            </div>
+        </div>
+
+        <footer class="btn-footer">
+            <button class="footer-btn btn-back" onclick="goBack()">Back</button>
+            <button class="footer-btn btn-continue" id="continueBtn" disabled onclick="goNext()">Continue</button>
+        </footer>
+    </main>
+</div>
+
+<script>
+    const options = document.querySelectorAll('.option');
+    const continueBtn = document.getElementById('continueBtn');
+    let selectedValue = null;
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            options.forEach(opt => opt.classList.remove('selected'));
+            option.classList.add('selected');
+            selectedValue = option.getAttribute('data-value');
+            continueBtn.disabled = false;
+        });
+    });
+
+    function goBack() {
+        window.location.href = 'step4.html';
+    }
+
+    function goNext() {
+        if (!selectedValue) return;
+        sessionStorage.setItem('aduTimeline', selectedValue);
+        window.location.href = 'step6.html';
+    }
+</script>
+</body>
+</html>
