@@ -28,7 +28,7 @@
             color: var(--primary-text);
             display: flex;
             justify-content: center;
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem; /* COMPACT: Reduced padding */
             min-height: 100vh;
         }
         
@@ -40,7 +40,7 @@
 
         /* Progress Bar & Header */
         .progress-header {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem; /* COMPACT: Reduced margin */
         }
 
         .step-info {
@@ -73,14 +73,14 @@
         }
 
         h1 {
-            font-size: 2.25rem;
+            font-size: 2rem; /* COMPACT: Reduced font size */
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
         .subtitle {
             color: var(--secondary-text);
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem; /* COMPACT: Reduced margin */
             font-size: 1rem;
             max-width: 600px;
         }
@@ -88,26 +88,26 @@
         /* Main Form & Grid Layout */
         .details-form {
             border-top: 1px solid var(--border-color);
-            padding-top: 2rem;
+            padding-top: 1.5rem; /* COMPACT: Reduced padding */
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
+            gap: 1.5rem; /* COMPACT: Reduced gap */
         }
         
         .section-title {
             font-weight: 600;
-            margin-bottom: 1.25rem;
-            font-size: 1.125rem;
+            margin-bottom: 1rem; /* COMPACT: Reduced margin */
+            font-size: 1.1rem; /* COMPACT: Reduced font size */
             color: var(--primary-text);
         }
 
         /* Radio Button Group Styling */
         .choice-group {
             display: grid;
-            gap: 1rem;
+            gap: 0.75rem; /* COMPACT: Reduced gap */
         }
         
         .sqft-group {
@@ -128,7 +128,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 1.25rem 1rem;
+            padding: 1rem; /* COMPACT: Reduced padding */
             border: 1px solid var(--border-color);
             border-radius: 12px;
             cursor: pointer;
@@ -140,7 +140,6 @@
             border-color: var(--accent-color);
         }
         
-        /* This is the magic: style the label when its radio button is checked */
         .choice-group input[type="radio"]:checked + .choice-label {
             border-color: var(--accent-color);
             box-shadow: 0 0 0 2px var(--accent-color);
@@ -148,9 +147,9 @@
         }
 
         .choice-icon {
-            width: 28px;
-            height: 28px;
-            margin-bottom: 0.75rem;
+            width: 24px; /* COMPACT: Reduced icon size */
+            height: 24px;
+            margin-bottom: 0.5rem; /* COMPACT: Reduced margin */
             color: var(--secondary-text);
             transition: color 0.2s ease;
         }
@@ -165,7 +164,7 @@
         }
 
         .choice-subtitle {
-            font-size: 0.875rem;
+            font-size: 0.8rem; /* COMPACT: Reduced font size */
             color: var(--secondary-text);
             margin-top: 0.25rem;
         }
@@ -177,7 +176,7 @@
         hr {
             border: none;
             border-top: 1px solid var(--border-color);
-            margin: 2.5rem 0;
+            margin: 1.5rem 0; /* COMPACT: Reduced margin */
         }
 
         /* Footer Buttons */
@@ -185,7 +184,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 3rem;
+            margin-top: 2rem; /* COMPACT: Reduced margin */
         }
         
         .footer-btn {
@@ -233,11 +232,10 @@
 
         @media (max-width: 480px) {
             .sqft-group, .bed-bath-group {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr); /* Keep 2 columns for a bit more space */
             }
             h1 { font-size: 1.75rem; }
         }
-
     </style>
 </head>
 <body>
