@@ -168,9 +168,11 @@
         window.location.href = 'step4.html';
     }
 
+    // Correct
     function goNext() {
         if (!selectedValue) return;
-        sessionStorage.setItem('aduTimeline', selectedValue);
+        // Stringify the value before saving
+        sessionStorage.setItem('aduTimeline', JSON.stringify(selectedValue));
         window.location.href = 'step6.html';
     }
 </script>
