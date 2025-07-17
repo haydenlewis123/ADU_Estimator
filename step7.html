@@ -1,154 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Step 6 – Your Estimate is Ready</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-text: #1F2937;
-            --secondary-text: #6B7280;
-            --accent-color: #e83038;
-            --accent-light: #fef2f2;
-            --border-color: #E5E7EB;
-            --font: 'Inter', sans-serif;
-            --success-green: #059669;
-            --success-light: #ECFDF5;
-            --card-bg: #ffffff;
-            --body-bg: #f9fafb;
-        }
-        body {
-            font-family: var(--font); margin: 0; padding: 2rem 1rem;
-            background: var(--body-bg); color: var(--primary-text);
-            display: flex; justify-content: center;
-        }
-        .container { max-width: 880px; width: 100%; }
-        .step-info { display: flex; justify-content: space-between; font-size: 0.875rem; color: var(--secondary-text); margin-bottom: 0.5rem; }
-        .progress-bar { width: 100%; height: 6px; background-color: var(--border-color); border-radius: 4px; overflow: hidden; margin-bottom: 2.5rem; }
-        .progress-fill { width: 100%; height: 100%; background-color: var(--accent-color); }
-        .page-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.5rem; }
-        .header-icon {
-            flex-shrink: 0; width: 40px; height: 40px;
-            background-color: var(--success-light); color: var(--success-green);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-        }
-        .header-icon svg { width: 24px; height: 24px; }
-        .header-text h1 { font-size: 1.75rem; margin: 0 0 0.25rem; }
-        .header-text p { margin: 0; color: var(--secondary-text); max-width: 600px; }
-        .estimate-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-        .card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.75rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05); }
-        .card h3 { margin: 0 0 1rem; font-size: 1.125rem; }
-        .cost-item { margin-bottom: 1rem; }
-        .cost-label { font-size: 0.875rem; color: var(--secondary-text); }
-        .cost-value { font-size: 1.875rem; font-weight: 700; margin: 0.25rem 0; }
-        .payment-plan { background-color: var(--accent-light); border: 1px solid #fee2e2; color: #991b1b; padding: 0.75rem; border-radius: 8px; font-size: 0.9rem; text-align: center; margin: 1rem 0; }
-        .payment-plan strong { font-size: 1.1rem; }
-        .cost-range { font-weight: 600; font-size: 1.1rem; }
-        .services-list { list-style: none; padding: 0; margin: 1.5rem 0 0; }
-        .services-list li { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; font-size: 0.9rem; }
-        .services-list .check-icon { width: 16px; height: 16px; color: var(--success-green); }
-        .cta-section { border-top: 1px solid var(--border-color); margin-top: 2.5rem; padding-top: 1.5rem; }
-        .cta-section h2 { font-size: 1.25rem; }
-        .cta-section p { color: var(--secondary-text); margin-bottom: 1.25rem; }
-        .btn { padding: 0.75rem 1.5rem; font-weight: 600; font-size: 1rem; border-radius: 8px; border: 1px solid; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
-        .btn-consult { background-color: var(--accent-color); color: #fff; border-color: var(--accent-color); }
-        .btn-feasibility { background-color: transparent; color: var(--accent-color); border-color: var(--accent-color); }
-    </style>
-</head>
-<body>
-
-<svg width="0" height="0" style="position:absolute">
-  <symbol id="icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" /></symbol>
-</svg>
-
-<div class="container">
-    <div class="step-info"><span>Step 6 of 6</span><span>100% Complete</span></div>
-    <div class="progress-bar"><div class="progress-fill"></div></div>
-
-    <div class="page-header">
-        <div class="header-icon"><svg><use xlink:href="#icon-check"></use></svg></div>
-        <div class="header-text">
-            <h1>Your Estimate is Ready!</h1>
-            <p>We've analyzed your project requirements and prepared a personalized estimate.</p>
-        </div>
-    </div>
-
-    <div class="estimate-section">
-        <div class="card">
-            <h3>Architectural Planning & Engineering</h3>
-            <div class="cost-item"><div class="cost-label">Fixed Cost:</div><div class="cost-value" id="fixedCost">$0</div></div>
-            <div class="payment-plan"><strong>$<span id="monthlyPayment">0</span>/month</strong> for 6 months</div>
-            <ul class="services-list">
-                <li><svg class="check-icon"><use xlink:href="#icon-check"></use></svg> Preliminary Design Consultation</li>
-                <li><svg class="check-icon"><use xlink:href="#icon-check"></use></svg> Architectural Drawing & Plans</li>
-                <li><svg class="check-icon"><use xlink:href="#icon-check"></use></svg> Structural Engineering</li>
-                <li><svg class="check-icon"><use xlink:href="#icon-check"></use></svg> Permit Application Assistance</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h3>Construction Cost Estimate</h3>
-            <div class="cost-item"><div class="cost-label">General Contractor:</div><div class="cost-range" >$<span id="gcLow">0</span> - $<span id="gcHigh">0</span> / sqft</div></div>
-            <div class="cost-item"><div class="cost-label">Owner-Builder:</div><div class="cost-range" >$<span id="obLow">0</span> - $<span id="obHigh">0</span> / sqft</div></div>
-            <p class="note" style="font-size: 0.8rem; margin-top: auto;">Note: This is a preliminary estimate. Final costs may vary based on site conditions, material selections, and contractor bids.</p>
-        </div>
-    </div>
-
-    <div class="cta-section">
-        <h2>Ready for a Free Consultation?</h2>
-        <p>Book a free call to discuss your project in detail with our experts.</p>
-        <a href="#" class="btn btn-consult">Book a Free Consult</a>
-    </div>
-    <div class="cta-section">
-        <h2>Need a Detailed Feasibility Report?</h2>
-        <p>Get a comprehensive analysis of your property's ADU potential.</p>
-        <a href="#" class="btn btn-feasibility">Get Feasibility Report</a>
-    </div>
-</div>
-
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Retrieve the saved data
-        const aduType = JSON.parse(sessionStorage.getItem('adu_type'));
-        const aduDetails = JSON.parse(sessionStorage.getItem('aduDetails'));
+    document.addEventListener('DOMContentLoaded', () => {
+        // Retrieve the saved data from previous steps
+        const aduType = JSON.parse(sessionStorage.getItem('adu_type'));
+        const aduDetails = JSON.parse(sessionStorage.getItem('aduDetails'));
 
-        // Check if data exists before calculating
-        if (!aduType || !aduDetails) {
-            console.error("Required data not found in sessionStorage.");
-            // You can optionally display an error to the user here
-            return;
-        }
+        // First, check if the required data exists
+        if (!aduType || !aduDetails) {
+            console.error("Required ADU data not found in session storage.");
+            // You could display an error message on the page here
+            return;
+        }
 
-        const sqftValue = aduDetails.squareFootage; // This will be 'Small', 'Medium', or 'Large'
+        const sqftValue = aduDetails.squareFootage; // This will be 'Small', 'Medium', or 'Large'
 
-        let fixedCost = 0;
-        let obRange = [0, 0];
-        let gcRange = [0, 0];
+        let fixedCost = 0;
+        let obRange = [0, 0];
+        let gcRange = [0, 0];
 
-        // Apply the correct logic
-        if (aduType === "Garage Conversion") {
-            fixedCost = 4425;
-            obRange = [75, 113];
-            gcRange = [113, 188];
-        } else if (aduType === "Basement Conversion") {
-            fixedCost = 4425;
-            obRange = [131, 188];
-            gcRange = [188, 263];
-        } else if (aduType === "Detached ADU") {
-            fixedCost = (sqftValue === 'Large') ? 7125 : 5625;
-            obRange = [131, 188];
-            gcRange = [188, 263];
-        }
+        // --- NEW, CORRECTED CALCULATION LOGIC ---
 
-        // Update the page with the calculated values
-        document.getElementById("fixedCost").textContent = `$${fixedCost.toLocaleString()}`;
-        document.getElementById("monthlyPayment").textContent = Math.round(fixedCost / 6).toLocaleString();
-        document.getElementById("obLow").textContent = obRange[0];
-        document.getElementById("obHigh").textContent = obRange[1];
-        document.getElementById("gcLow").textContent = gcRange[0];
-        document.getElementById("gcHigh").textContent = gcRange[1];
-    });
+        // 1. Determine the Fixed Cost based on ADU Type and Size
+        if (aduType === "Garage Conversion" || aduType === "Basement Conversion") {
+            fixedCost = 4425;
+        } else if (aduType === "Attached ADU" || aduType === "Not Sure Yet") {
+            fixedCost = 5625;
+        } else if (aduType === "Detached ADU") {
+            if (sqftValue === 'Large') {
+                fixedCost = 7125;
+            } else {
+                fixedCost = 5625;
+            }
+        }
+
+        // 2. Determine Per-Square-Foot Costs based on ADU Type
+        if (aduType === "Garage Conversion") {
+            obRange = [75, 113];
+            gcRange = [113, 188];
+        } else if (aduType === "Attached ADU") {
+            obRange = [131, 188];
+            gcRange = [150, 225];
+        } else { 
+            // This covers "Detached ADU", "Basement Conversion", and "Not Sure Yet"
+            obRange = [131, 188];
+            gcRange = [188, 263];
+        }
+
+        // --- END OF LOGIC ---
+
+        // Update the page with the calculated values
+        document.getElementById("fixedCost").textContent = `$${fixedCost.toLocaleString()}`;
+        document.getElementById("monthlyPayment").textContent = Math.round(fixedCost / 6).toLocaleString();
+        document.getElementById("obLow").textContent = obRange[0];
+        document.getElementById("obHigh").textContent = obRange[1];
+        document.getElementById("gcLow").textContent = gcRange[0];
+        document.getElementById("gcHigh").textContent = gcRange[1];
+    });
 </script>
-
-</body>
-</html>
